@@ -13,7 +13,7 @@ export default function Services() {
       <PageHero
         label="OUR CAPABILITIES"
         title="Whatever the idea needs to become real."
-        description="Creative technology crosses disciplines. We bring the right combination of software, AI, hardware and production thinking to the experience."
+        description="You don’t need to arrive with a technical plan. Bring us the idea, and we’ll help choose the software, equipment and approach that fit."
       />
       <section className="wrap work-index service-grid">
         {services.map((s, i) => (

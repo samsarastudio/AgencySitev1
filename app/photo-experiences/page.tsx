@@ -70,8 +70,8 @@ export default function PhotoExperiences() {
           </h2>
           <div>
             <p className="lead">
-              Guests step up to the DSLR booth, take a photo and receive an
-              instant print in a custom magnet frame.
+              Step up with a friend, strike a pose and pick up your photo in a
+              custom magnet frame. Your attendant will help along the way.
             </p>
             <p>
               Add names, a date or approved event branding to the nameplate.
@@ -105,8 +105,8 @@ export default function PhotoExperiences() {
             </Button>
           </div>
           <p>
-            Share your date, location and guest count. Packages are quoted for
-            your event.
+            Tell us when, where and roughly how many people are coming. We’ll
+            help you choose the right package.
           </p>
         </section>
       </div>

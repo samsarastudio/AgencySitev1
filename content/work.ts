@@ -26,19 +26,19 @@ export const studies: Study[] = [
       "A standing guest, a live reflection, and five environments to step into.",
     categories: ["Interactive", "Spatial"],
     status: "Experience design · Proposed scope",
-    image: "/images/ar-environment-concept.webp",
+    image: "/images/ar-environment-concept-v2.webp",
     alt: "Concept visualization of a standing guest composited into a tropical scene on a large display",
     brief:
-      "Create an immediate, standing-participant experience that places a guest inside one of five aspirational environments.",
+      "Let a guest step in front of a screen and see themselves somewhere unexpected, with five different worlds to discover.",
     challenge:
-      "Live separation, tracking and foreground layers need to remain aligned as a person moves. Every scene must make sense from the same standing position.",
+      "The scene needs to move naturally with the person. Keeping their outline and the objects around them aligned is what makes the illusion feel convincing.",
     experience:
       "A guest steps into a marked capture area. The system tracks their position and assigns an environment at random. Background replacement and layered objects place the guest within the scene before the experience resets.",
     flow: [
       "Step into position",
-      "Track and align",
-      "Assign a scene",
-      "Composite in real time",
+      "Let the camera find you",
+      "Discover your scene",
+      "See yourself in the scene",
       "Reset for next guest",
     ],
     technologies: [
@@ -61,16 +61,16 @@ export const studies: Study[] = [
       "Personalized portraits, from camera capture to a finished physical print.",
     categories: ["AI", "Photo"],
     status: "Experience design · Final software scope",
-    image: "/images/ai-portrait-concept.webp",
-    alt: "Concept visualization of a personalized motorsport portrait beside a camera and photo print",
+    image: "/images/ai-portrait-kiosk.webp",
+    alt: "Custom InMoment AI photobooth kiosk with an integrated camera and guest screen beside a separate photo printer",
     brief:
-      "Connect a guest’s creative selection to an approved portrait composition, with a clear path from capture to digital delivery and print.",
+      "Give guests a chance to become part of the event’s visual world, then send them home with their own portrait in print and by email.",
     challenge:
-      "Keep the selected composition, consent, accepted capture, generated image and print job associated with the same session.",
+      "Every guest needs to receive their own picture. Their chosen style, photo permission, capture and finished print all have to stay together, even while other people are waiting.",
     experience:
       "The guest chooses from six treatments, enters their details and provides the required consent. They review and can retake their camera photo before submitting it for one AI generation. The finished image appears on screen, is emailed and enters an automatic print queue.",
     flow: [
-      "Choose a treatment",
+      "Choose a portrait style",
       "Details and consent",
       "Capture and review",
       "Generate and preview",
@@ -100,12 +100,12 @@ export const studies: Study[] = [
       "A basketball shooting motion becomes the controller for a rhythm challenge.",
     categories: ["Interactive", "Event Technology"],
     status: "Experience design · Proposed scope",
-    image: "/images/gesture-basketball-concept.webp",
+    image: "/images/gesture-basketball-concept-v2.webp",
     alt: "Concept visualization of an empty-handed player making a shooting gesture toward three virtual basketball lanes",
     brief:
-      "Combine a natural shooting gesture with beat-synchronized targets and immediate scoring feedback.",
+      "Turn a familiar shooting motion into a game: follow the beat, aim at a virtual hoop and see how many points you can earn.",
     challenge:
-      "Separate intentional gestures from incidental movement, classify direction and keep visual, audio and scoring timing coordinated.",
+      "The game needs to know when someone is taking a shot, rather than just moving. The music, targets and score also have to agree on exactly when that shot happened.",
     experience:
       "After QR validation and station assignment, the player enters a guided tracking zone. A short tutorial introduces three lanes. Shooting gestures timed to incoming virtual hoops build a score, followed by results and a QR-accessible photo.",
     flow: [
@@ -133,22 +133,24 @@ export const studies: Study[] = [
   },
   {
     slug: "live-photo-mosaic",
+    image: "/images/photo-mosaic-concept.webp",
+    alt: "InMoment photo mosaic display with a grid of guest photos and a nearby mobile selfie station, concept visualization",
     title: "Individual faces. One shared picture.",
     eyebrow: "Live photo mosaic",
     summary: "Mobile selfies become a growing, shared event display.",
     categories: ["Photo", "Web", "Installation"],
     status: "Experience design · Draft estimate",
     brief:
-      "Bring contributions from multiple QR locations together on a central event display, then deliver the final mosaic by email.",
+      "Give everyone a way to add their face to one shared picture, then email the finished mosaic after the event.",
     challenge:
-      "Coordinate mobile capture, image orientation and resizing, a live submission queue and reconnect behavior on the display.",
+      "Photos arrive from different phones and at different times. They need to face the right way, fit the grid and reach the display in order, including after a connection drops.",
     experience:
       "Guests scan a QR code, enter their details, capture and review a selfie, then submit it. Each image joins a predefined grid on the event display. A final mosaic export is prepared for email delivery after the event.",
     flow: [
       "Scan event QR",
       "Capture and review",
       "Submit the photo",
-      "Populate the grid",
+      "Watch the picture grow",
       "Email final mosaic",
     ],
     technologies: [
@@ -165,16 +167,18 @@ export const studies: Study[] = [
   },
   {
     slug: "spatial-selfie-experience",
+    image: "/images/spatial-selfie-concept.webp",
+    alt: "Custom InMoment capture kiosk beside a separate framed spatial portrait display, concept visualization",
     title: "A selfie with another dimension.",
     eyebrow: "Spatial selfie experience",
     summary:
-      "A controlled capture journey connecting spatial media, checkout and secure delivery.",
+      "A selfie experience with payment, a composited photo and a private QR download.",
     categories: ["Spatial", "Photo", "Event Technology"],
     status: "Experience design · Ballpark proposal",
     brief:
-      "Guide a guest through a spatial-display selfie experience with coordinated payment, capture, compositing and mobile delivery.",
+      "Make it easy for a guest to pay, create a selfie with a spatial display and take the finished image away on their phone.",
     challenge:
-      "Unlock one session per confirmed purchase and recover cleanly from cancelled payments, interrupted connections and expired sessions.",
+      "A completed purchase should open one photo session. If someone cancels, loses connection or runs out of time, the next step needs to be clear without charging or unlocking twice.",
     experience:
       "In the recommended flow, a guest selects a package and pays. Confirmation unlocks a kiosk session. The guest captures and reviews a composited selfie, then scans a secure QR code to receive it.",
     flow: [
@@ -196,45 +200,9 @@ export const studies: Study[] = [
     services: ["event-software", "hardware-software-integration"],
     visibility: "published",
   },
-  {
-    slug: "connected-discovery-hub",
-    image: "/images/connected-photo-concept.webp",
-    alt: "Concept visualization of an in-car guest selfie and an external portrait display",
-    title: "One venue. Many ways in.",
-    eyebrow: "Connected discovery hub",
-    summary:
-      "A mobile journey connecting in-car photo moments, discovery, games and rewards.",
-    categories: ["Web", "Event Technology"],
-    status: "Experience design · Concept and rough estimate",
-    brief:
-      "Connect multiple activation areas through one mobile experience that gives visitors a reason to explore and return.",
-    challenge:
-      "Make individual QR encounters feel like one journey while clarifying account, reward and existing CRM integration requirements.",
-    experience:
-      "A guest scans an entry QR code and creates a profile. Location-specific pages introduce vehicle content and games such as trivia or memory matching. An in-car selfie moment and an external photo carousel extend the experience. A home dashboard brings the guest back to their rewards and available experiences.",
-    flow: [
-      "Scan a location",
-      "Create a profile",
-      "Explore and play",
-      "Collect reward points",
-      "Discover another zone",
-    ],
-    technologies: [
-      "Mobile web application",
-      "Location-specific QR flows",
-      "Mini-games",
-      "Reward account design",
-      "CRM integration planning",
-    ],
-    production:
-      "The concept leaves CRM integration questions open. Optional in-car tablet video capture and a future redemption location are expansion ideas, not included completed features.",
-    services: ["event-software", "creative-technology"],
-    visibility: "published",
-  },
 ];
 const order = [
   "ai-portrait-experience",
-  "connected-discovery-hub",
   "environmental-ar-mirror",
   "live-photo-mosaic",
   "spatial-selfie-experience",

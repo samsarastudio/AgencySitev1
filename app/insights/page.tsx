@@ -13,7 +13,7 @@ export default function Insights() {
       <PageHero
         label="INSIGHTS / FIELD NOTES"
         title="Behind every moment, a little thinking."
-        description="Ideas, production questions and practical notes from the space between digital and physical."
+        description="Planning a booth, an AI portrait experience or something harder to describe? Here are a few things to think through before event day."
       />
       <section className="wrap">
         <InsightsBrowser articles={publishedArticles} />

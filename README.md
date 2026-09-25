@@ -15,7 +15,7 @@ Open http://127.0.0.1:3000. For production: `npm run build` then `npm start`.
 
 ## What is included
 
-49 content pages: homepage, six anonymized experience studies, six service pages, FrameFlix overview and product/package/gallery pages, eight preserved local/event pages, eleven articles, agency/about/capabilities pages, inquiry and quote forms, newsletter boundary, FAQ and retained legal content. Includes generated concept imagery, a clean vector production logo based on a generated interlocking-frame direction, responsive layouts, URL-based filters and search, breadcrumbs, explicit return links, sitemap, robots, RSS, article/service/organization/breadcrumb schema, and 68 permanent blog redirects.
+48 content pages: homepage, five anonymized experience studies, six service pages, FrameFlix overview and product/package/gallery pages, eight preserved local/event pages, eleven articles, agency/about/capabilities pages, inquiry and quote forms, newsletter boundary, FAQ and retained legal content. Includes generated concept imagery, a clean vector production logo based on a generated interlocking-frame direction, responsive layouts, URL-based filters and search, breadcrumbs, explicit return links, sitemap, robots, RSS, article/service/organization/breadcrumb schema, and 68 permanent blog redirects.
 
 The existing FrameFlix site is linked at https://frameflix.inmomentservices.com. No changes were made to its domain or the current inmomentservices.com deployment.
 

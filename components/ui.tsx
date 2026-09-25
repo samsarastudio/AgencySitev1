@@ -122,17 +122,17 @@ export function Cta() {
       <p className="eyebrow">THE NEXT MOMENT STARTS HERE</p>
       <div>
         <h2>
-          Have a strange brief?
+          Have an idea in mind?
           <br />
-          Send it over.
+          Let’s talk.
         </h2>
         <Button href="/contact" event="start_project">
           Start a project
         </Button>
       </div>
       <p>
-        Tell us what you want people to experience. We’ll help work out the
-        rest.
+        A few notes are enough to start. Tell us what you’d like guests to do,
+        and we’ll work through the details with you.
       </p>
     </section>
   );

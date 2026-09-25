@@ -27,9 +27,10 @@ export default function Home() {
         </h1>
         <div className="hero-bottom">
           <p>
-            AI photobooths, personal keepsakes and connected event experiences.
-            <br className="desktop-break" /> Built for your brand. Made for your
-            guests.
+            We build AI photobooths and photo experiences that give people a
+            reason to join in.
+            <br className="desktop-break" /> From the first pose to the photo
+            they take home.
           </p>
           <div className="button-row">
             <Button href="/contact" event="start_project">
@@ -42,8 +43,8 @@ export default function Home() {
         </div>
         <div className="hero-visual">
           <Image
-            src="/images/ai-portrait-concept.webp"
-            alt="Concept visualization of an AI portrait capture experience with an unbranded racing portrait and print"
+            src="/images/ai-portrait-kiosk.webp"
+            alt="AI photobooth concept with a custom InMoment kiosk, integrated camera and touchscreen, and a separate photo printer"
             fill
             loading="eager"
             fetchPriority="high"
@@ -80,13 +81,14 @@ export default function Home() {
           link="View all experiences"
         />
         <p className="section-intro">
-          From AI portraits and connected photo journeys to live interactive
-          environments. A look at the systems behind the guest experience.
+          A guest becomes a racing driver. Individual selfies become one shared
+          picture. A screen opens onto another world. Here’s how those ideas
+          come together.
         </p>
         <div className="work-grid">
           {[
             publishedStudies.find((s) => s.slug === "ai-portrait-experience")!,
-            publishedStudies.find((s) => s.slug === "connected-discovery-hub")!,
+            publishedStudies.find((s) => s.slug === "live-photo-mosaic")!,
             publishedStudies.find((s) => s.slug === "environmental-ar-mirror")!,
           ].map((s, i) => (
             <WorkCard key={s.slug} study={s} index={i} />
@@ -111,9 +113,9 @@ export default function Home() {
             they take home.
           </h2>
           <p>
-            Our photo experiences bring the digital and physical together in a
-            very personal way. DSLR photos. Instant prints. Custom fridge
-            magnets, nameplates and stickers.
+            A favourite photo deserves a spot on the fridge. FrameFlix brings
+            the booth, instant prints and custom magnets or stickers to your
+            celebration. We run the station so you can enjoy it, too.
           </p>
           <Button href="/photo-experiences" secondary>
             Explore photo experiences
@@ -142,7 +144,7 @@ export default function Home() {
             {[
               [
                 "Experiential AI",
-                "Personalized portraits and media journeys that carry the guest from input to output.",
+                "Turn a guest’s photo into a portrait made for your event, ready to share or print.",
                 "experiential-ai",
               ],
               [
@@ -152,7 +154,7 @@ export default function Home() {
               ],
               [
                 "Event software",
-                "Kiosks, mobile experiences and the systems that connect an activation.",
+                "Help guests sign in, take part and find their photos without getting lost along the way.",
                 "event-software",
               ],
               [
@@ -180,9 +182,9 @@ export default function Home() {
         </h2>
         <div>
           <p>
-            That’s a good place to start. We connect creative ambition with the
-            software, physical systems and practical testing an experience
-            needs.
+            That’s a good place to start. Tell us the idea, even if you haven’t
+            worked out how it would run. We’ll help you test the tricky parts
+            and find a practical way to build it.
           </p>
           <Button href="/for-agencies" secondary>
             Meet your technical partner
@@ -198,14 +200,23 @@ export default function Home() {
           {[
             [
               "Understand",
-              "The audience, the objective, the room and the constraints.",
+              "Tell us who’s coming, what you have in mind and where it needs to happen.",
             ],
-            ["Prototype", "Test the interaction and the technical unknowns."],
-            ["Build", "Bring software, content and physical systems together."],
-            ["Test", "Check guest flows, edge cases and deployment readiness."],
+            [
+              "Prototype",
+              "Try the part we need to get right before committing to the full build.",
+            ],
+            [
+              "Build",
+              "Connect the photos, software and equipment into one experience.",
+            ],
+            [
+              "Test",
+              "Walk through it as a guest, then check what happens when something goes wrong.",
+            ],
             [
               "Launch",
-              "Prepare the handoff and support defined for your project.",
+              "Get the team ready to run it, with the handoff and support we’ve agreed together.",
             ],
           ].map(([h, p], i) => (
             <div key={h}>
@@ -232,7 +243,7 @@ export default function Home() {
       <section className="section wrap">
         <SectionHead
           label="04 / FIELD NOTES"
-          title="Thinking behind the experience."
+          title="Things worth figuring out before event day."
           href="/insights"
           link="All insights"
         />

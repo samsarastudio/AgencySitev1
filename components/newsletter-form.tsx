@@ -49,8 +49,8 @@ export function NewsletterForm() {
   return (
     <form className="newsletter-form" onSubmit={submit}>
       <p>
-        Occasional notes on ideas, builds and experiments. Newsletter signup is
-        available once our mailing service is connected.
+        A place for the ideas we’re trying and the things we’re learning.
+        Newsletter signup isn’t open yet; check Insights for our latest notes.
       </p>
       <label className="field" htmlFor="newsletter-email">
         Email address

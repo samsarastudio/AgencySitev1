@@ -4,23 +4,23 @@ export const editorialPages = [
     label: "ABOUT INMOMENT",
     title: "The idea people. And the make-it-work people.",
     description:
-      "InMoment Services brings creative thinking and technical production into the same conversation.",
+      "We’re here to turn an idea into something people can actually take part in.",
     sections: [
       {
         title: "Start with what people feel.",
-        body: "The technology matters because of the experience it creates. We begin with the audience, the setting and the interaction, then work backwards to the software and physical systems needed to make it happen.",
+        body: "What will make someone stop, smile or want to join in? That’s where we start. Once we understand the people and the setting, we work out the software and equipment that will bring the idea to life.",
       },
       {
-        title: "Make the uncertain part tangible.",
-        body: "A focused prototype can answer a question that a presentation cannot. We use early technical exploration to clarify the creative direction, expose limitations and define a practical build.",
+        title: "Try the tricky part early.",
+        body: "If we’re unsure how something will work, we build a small version and try it. You get something to react to, and we find out what needs changing while there’s still room to change it.",
       },
       {
         title: "Respect the room.",
-        body: "The camera position, guest instructions, display, printer and reset behavior are all part of the experience. We plan and test those details alongside the visible creative.",
+        body: "The idea has to work in a real venue, with real people waiting their turn. We think about where the camera goes, what guests see, where they collect a print and how the next person gets started.",
       },
       {
         title: "Work well with other people.",
-        body: "Brands, agencies and event producers bring different strengths. We can join an existing team as the technical production partner, with a clear scope and a shared view of the guest journey.",
+        body: "You may already have a creative team, an event producer or a campaign ready to go. We can join that team, take on the technical build and work through the details together.",
       },
     ],
   },
@@ -33,19 +33,19 @@ export const editorialPages = [
     sections: [
       {
         title: "Bring us in while the idea is still taking shape.",
-        body: "We can help explore feasibility, prototype a difficult interaction and identify the dependencies before the production plan is fixed. Start with the creative brief and the questions that do not have obvious answers.",
+        body: "A sketch, a moodboard or a question is enough to start. We can help you test what’s possible and spot the practical challenges before you commit to a production plan.",
       },
       {
         title: "A technical partner inside your process.",
-        body: "Custom software, AI composition, kiosk flows, interactive displays and hardware integration can sit within your wider campaign. We define the boundaries, review points and handoff so each team knows what it owns.",
+        body: "Keep your creative direction and client relationship. We’ll work with your team on the software, AI portraits, screens and equipment, with clear check-ins and a shared understanding of who’s handling what.",
       },
       {
         title: "Clear scope. Shared expectations.",
-        body: "Creative assets, hardware, venue networking and event operations need owners. We work through those responsibilities with you and separate the core experience from options and future phases.",
+        body: "We’ll work out who supplies the artwork, equipment and internet, and who runs the experience on the day. The proposal will make clear what’s included, what’s optional and what can wait for a later phase.",
       },
       {
         title: "From feasibility to handoff.",
-        body: "Engagements can focus on an early prototype, a scoped software build or an integrated experience. Deployment preparation and support are defined around the project rather than assumed.",
+        body: "Need help proving an idea, building the software or connecting the whole setup? We can talk through each option. We’ll also agree on the handoff and event support before the work begins.",
       },
     ],
   },
@@ -54,7 +54,7 @@ export const editorialPages = [
     label: "CAPABILITIES / PARTNER OVERVIEW",
     title: "Creative ambition. Practical production.",
     description:
-      "A concise introduction for brands, agencies, marketing teams and event producers exploring a technical production partner.",
+      "A quick look at what we can help you make, and how we’d work with your team.",
     sections: [
       {
         title: "What we do",
@@ -62,19 +62,19 @@ export const editorialPages = [
       },
       {
         title: "Typical engagements",
-        body: "An AI portrait capture-to-print journey. A standing-participant AR mirror. A gesture-based game. A mobile photo contribution system. A connected discovery experience. Explore the experience studies for the specific scope and technical approach.",
+        body: "A booth that turns a guest into a racing driver. A mirror that places them in another world. A game controlled by movement. Our experience studies explain how these ideas work and what each design includes.",
       },
       {
         title: "How a project takes shape",
-        body: "We review the objective, audience, environment and constraints; prototype the critical unknowns; agree the scope; build and test the experience; and prepare the deployment handoff. Hardware, third-party services, creative inputs and support responsibilities are made explicit.",
+        body: "First, we talk about the guests, the idea and the venue. Then we try the difficult parts, agree on the build and test it together. Along the way, we make sure everyone knows who’s providing the equipment, artwork, services and event support.",
       },
       {
         title: "Local photo experiences",
         body: "FrameFlix serves Kitchener, Waterloo, Cambridge and Guelph. For custom technology projects, discuss the venue and delivery requirements with us so remote preparation, installation responsibilities and any onsite needs can be scoped.",
       },
       {
-        title: "Start the vendor conversation",
-        body: "Send the brief, delivery date and any procurement requirements to hello@inmomentservices.com. We will discuss the engagement and provide the information relevant to your project.",
+        title: "Tell us what you’re planning",
+        body: "Email hello@inmomentservices.com with your idea and event date. If your team has a supplier process, send that too, and we’ll work through what you need.",
       },
     ],
   },
@@ -87,7 +87,7 @@ export const localPages = [
     description:
       "An attendant-operated DSLR booth, instant prints and a custom keepsake for your Kitchener event.",
     context:
-      "From downtown receptions to community celebrations and company events, start with the guest experience you want. Share the venue, date and approximate audience so we can plan the setup and coverage.",
+      "Planning a downtown reception, a community celebration or an evening with your team? Tell us where and when, and we’ll help you fit a photo booth and keepsakes into the day.",
     nearby: "Waterloo, Cambridge, Breslau and nearby Waterloo Region venues",
   },
   {
@@ -97,7 +97,7 @@ export const localPages = [
     description:
       "Custom photo-magnet keepsakes and live stickers for weddings, campus celebrations and company events in Waterloo.",
     context:
-      "Whether you are planning an Uptown gathering, a university celebration or a corporate evening, the photo experience should fit the schedule and the space. We confirm access, coverage and guest quantities in your quote.",
+      "An Uptown party, a campus celebration or a company evening: each has its own rhythm. We’ll help you choose when the booth opens and how it fits into the space, then put the details in your quote.",
     nearby:
       "Kitchener, Cambridge, St. Jacobs and surrounding Waterloo Region venues",
   },
@@ -108,7 +108,7 @@ export const localPages = [
     description:
       "FrameFlix photo booth packages with custom magnets, event nameplates and an attendant in Cambridge.",
     context:
-      "Planning in Galt, Preston or Hespeler? Tell us about the venue and the occasion. A nameplate with your event details and a finished photo magnet can tie the guest experience to the day.",
+      "Celebrating in Galt, Preston or Hespeler? Bring your guests together for a photo, then send them home with a magnet carrying the names, date or detail that makes the day yours.",
     nearby: "Kitchener, Waterloo and Guelph",
   },
   {
@@ -118,7 +118,7 @@ export const localPages = [
     description:
       "DSLR photos, instant prints, custom fridge magnets and Sticker Studio for Guelph events.",
     context:
-      "From an urban reception to a celebration outside the city centre, venue access and setup matter. Share the location and guest count so we can confirm a practical booth and keepsake package.",
+      "Whether you’re celebrating in the city or a little further out, we’d love to hear the plan. Share the venue and guest count, and we’ll work out the booth setup and keepsakes with you.",
     nearby: "Cambridge, Kitchener and Waterloo",
   },
   {
@@ -128,7 +128,7 @@ export const localPages = [
     description:
       "Personalized fridge-magnet frames, nameplates and photo experiences for weddings across Waterloo Region.",
     context:
-      "Match the event nameplate to your wedding details and build the booth window around your reception. An attendant runs the experience, with setup and teardown outside Essential and Premium active coverage.",
+      "Give your guests a photo from the day, finished with your names and wedding date. We’ll plan the booth around your reception and have an attendant run it. With Essential and Premium, setup and teardown don’t use up your three hours of booth time.",
     nearby: "Kitchener, Waterloo, Cambridge and Guelph",
   },
   {
@@ -138,7 +138,7 @@ export const localPages = [
     description:
       "Branded photo magnets and sticker experiences for corporate events in Waterloo Region.",
     context:
-      "Bring an approved logo, campaign line or event date into the nameplate and photo treatment. Share your brand guidance, guest count and agenda to plan the output and operation together.",
+      "Give the team something personal to take home. We can bring your approved logo, event date or campaign line into the design while keeping the guest’s photo at the centre. Send us your brand guide and schedule to get started.",
     nearby: "Kitchener, Waterloo, Cambridge and Guelph",
   },
   {
@@ -148,7 +148,7 @@ export const localPages = [
     description:
       "Attendant-operated photo booths, custom magnets and stickers for birthdays in Kitchener–Waterloo.",
     context:
-      "A milestone birthday, a family gathering or a party with friends can each call for a different format. Choose a nameplate, a photo magnet or a live sticker experience around your theme and audience.",
+      "Big birthday or small get-together, the photos are part of the fun. Add a name, age or party theme to a magnet or sticker, and give everyone a little reminder of being there.",
     nearby: "Cambridge, Guelph and Waterloo Region",
   },
   {
@@ -158,14 +158,14 @@ export const localPages = [
     description:
       "Live photo stickers, cutouts, labels and party favours for Kitchener–Waterloo events.",
     context:
-      "Book Sticker Studio by itself or combine it with fridge magnets. An attendant operates the station, and the format and capacity are quoted around sticker size, guest count and coverage.",
+      "Watch a photo become a sticker, printed and cut at the party. Book Sticker Studio on its own or alongside magnets. We’ll help you choose the size and quantity, and an attendant will run the station.",
     nearby: "Cambridge, Guelph and Waterloo Region",
   },
 ];
 export const faqs = [
   [
     "What is FrameFlix?",
-    "An attendant-operated DSLR photo booth and guest-keepsake experience. Guests receive instant prints, with custom fridge-magnet frames and event nameplates available in quoted packages.",
+    "FrameFlix is our photo booth and keepsake service. We bring a DSLR booth and an attendant, guests take their photos, and prints are made on the spot. You can add custom magnet frames and nameplates through our packages.",
   ],
   [
     "Where do you offer photo experiences?",
@@ -193,7 +193,7 @@ export const faqs = [
   ],
   [
     "Do you build custom technology for agencies?",
-    "Yes. We can help with feasibility, prototyping, custom software and hardware integration. The specific deliverables and deployment support are defined around the project.",
+    "Yes. Bring us the idea and we’ll help work out how to build it, from trying a prototype to connecting the software and equipment. We’ll agree on the work and event support with your team.",
   ],
   [
     "Can we see product samples?",

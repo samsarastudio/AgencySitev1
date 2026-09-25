@@ -20,7 +20,7 @@ export type Article = {
 };
 const photo = "/images/setup-magnet-booth.webp";
 const defaults = {
-  author: "InMoment Editorial",
+  author: "InMoment Team",
   published: "2026-09-25",
   image: photo,
   imageAlt: "FrameFlix magnet and photo booth product imagery",
@@ -35,14 +35,14 @@ export const articles: Article[] = [
       "The creative treatment is only one part of the experience. Plan the guest journey, consent, generation and delivery together.",
     category: "Experiential AI",
     tags: ["AI", "portraits", "planning"],
-    image: "/images/ai-portrait-concept.webp",
+    image: "/images/ai-portrait-kiosk.webp",
     imageAlt: "Unbranded racing portrait experience concept",
     imageCaption: "Concept visualization",
     sections: [
       {
         heading: "Begin with the output",
         paragraphs: [
-          "Define the image a guest should receive before choosing the generation workflow. An approved body and scene composition with calibrated face placement is a different brief from unconstrained image generation. Agree on what is fixed, what is personalized and what a successful output looks like.",
+          "Start with the picture you want someone to take home. Are you putting their face into an approved scene, or asking AI to create something more open-ended? Those need different builds. A few sample images help everyone agree on what stays fixed and what changes for each guest.",
           "Build a representative set of test outputs early. Review framing, lighting, face placement and the space needed for approved event graphics. Creative approval and technical testing should happen together.",
         ],
       },
@@ -76,7 +76,7 @@ export const articles: Article[] = [
       "Look at the whole interaction when planning how guests move through an activation.",
     category: "Production",
     tags: ["throughput", "kiosks", "planning"],
-    image: "/images/gesture-basketball-concept.webp",
+    image: "/images/gesture-basketball-concept-v2.webp",
     imageAlt: "Gesture game concept in an event space",
     imageCaption: "Concept visualization",
     sections: [
@@ -90,7 +90,7 @@ export const articles: Article[] = [
       {
         heading: "Measure the slowest handoff",
         paragraphs: [
-          "Time a representative end-to-end session on production-equivalent hardware. Include the guest’s decisions, not just the application’s processing time. Repeat the exercise with people who have not seen the interface before.",
+          "Ask someone who hasn’t seen the booth before to try it, and time the whole visit. Include choosing a style, reading the instructions and collecting the photo. Use the equipment you plan to take to the event so the timing means something.",
           "Treat expected processing times as estimates until tested in the intended conditions. Network services, camera behavior, printers and participant choices all introduce variation. Use the observed range when discussing capacity; avoid presenting a theoretical maximum as a guarantee.",
         ],
       },
@@ -121,7 +121,7 @@ export const articles: Article[] = [
         heading: "A photo that becomes a keepsake",
         paragraphs: [
           "Custom fridge-magnet frames give guests a finished object to take home. With FrameFlix, the photo is paired with a nameplate carrying your event names, date or approved logo. The current frame palette includes blush, cream, mint and baby blue.",
-          "This can suit a wedding, anniversary, milestone birthday or company event where the keepsake is part of the occasion’s visual identity. Share the design direction early so the nameplate and photo treatment can be considered together.",
+          "For a wedding, birthday or team celebration, those little details make the photo feel like part of the day. Send us your colours and wording early so the frame, nameplate and print look right together.",
         ],
       },
       {
@@ -169,7 +169,7 @@ export const articles: Article[] = [
       {
         heading: "Plan around the actual guest count",
         paragraphs: [
-          "Share the approximate audience and the number of physical keepsakes you want. Digital photos and physical frame quantities are different parts of a booking. The right coverage window depends on the format, guest behavior and any other activities happening at the same time.",
+          "Tell us roughly how many people are coming and how many keepsakes you’d like. The number of digital photos and the number of physical frames are separate parts of your package. We’ll look at both alongside the evening’s schedule.",
           "Ask about extra coverage or frames if the event changes. A written update keeps the planner, attendant and host working from the same expectations.",
         ],
       },
@@ -205,7 +205,7 @@ export const articles: Article[] = [
         heading: "Brief the operation as well as the artwork",
         paragraphs: [
           "Include the venue, date, guest count and active coverage window. Tell the team if the experience needs to move between spaces or fit a particular agenda. Attendant-led operation and setup should be coordinated with the event producer.",
-          "Ask for a quote based on the actual format and quantities. A photo experience can support a campaign, but sharing, leads and engagement should be measured rather than promised in advance.",
+          "Get a quote for the format and quantities you actually need. If your team also wants to measure sharing or participation, bring that up early so it can be planned into the experience.",
         ],
       },
     ],
@@ -241,7 +241,7 @@ export const articles: Article[] = [
       {
         heading: "Agree on care and quantities",
         paragraphs: [
-          "Print and frame durability depend on the material, handling and environment. Avoid treating a keepsake as indestructible or assigning a lifespan without product-specific evidence. Follow the supplied care guidance.",
+          "A keepsake still needs a little care. Follow the guidance that comes with your print and frame, and ask if you’re unsure where to display it or how to clean it.",
           "Confirm the number of physical frames separately from digital gallery access. Essential and Premium offer defined quantities; Signature packages are tailored to the event.",
         ],
       },
@@ -264,7 +264,7 @@ export const articles: Article[] = [
       {
         heading: "Look at the finished product",
         paragraphs: [
-          "FrameFlix packages use dye-sublimation photo prints. Ask to see a sample in the intended frame or magnet so you can judge the finish, crop and design together. A screen preview alone cannot show the feel of the physical keepsake.",
+          "FrameFlix packages use dye-sublimation photo prints. Ask to see a sample in the intended frame or magnet so you can judge the finish, crop and design together. It helps to hold the finished piece in your hand, too.",
           "Review the artwork at its final output size. Important faces, text and branding need enough space from the crop and frame edge.",
         ],
       },
@@ -301,7 +301,7 @@ export const articles: Article[] = [
       {
         heading: "Choose a connection to the day",
         paragraphs: [
-          "A favour can reflect a shared experience rather than simply filling a place setting. A photo taken at the reception, a family recipe card or a locally made treat gives the object a connection to the occasion.",
+          "Think about what makes the day yours. A reception photo, a family recipe or a locally made treat can give guests a small reminder of sharing it with you.",
           "Think about the way guests will receive it. An activity-based favour needs time in the schedule; a table gift needs to travel home easily.",
         ],
       },
@@ -336,7 +336,7 @@ export const articles: Article[] = [
         heading: "Define what guests will do",
         paragraphs: [
           "Start with the interaction you want: a group pose, a short capture, a generated portrait or a physical keepsake. Describe that action in ordinary language before comparing equipment and software.",
-          "A format that fits one event can be awkward at another. Consider the age and comfort of the audience, the space, accessibility needs and the amount of explanation required. Popularity alone is not a reason to choose it.",
+          "Picture your guests using it. Will they want to pose as a group, try an effect or pick up a keepsake? Think about the space and any help people might need to join in. That’s a more useful starting point than what’s trending.",
         ],
       },
       {
@@ -363,7 +363,7 @@ export const articles: Article[] = [
       "Make connectivity, recovery and delivery explicit in the technical brief.",
     category: "Production",
     tags: ["networks", "kiosks", "reliability"],
-    image: "/images/ar-environment-concept.webp",
+    image: "/images/ar-environment-concept-v2.webp",
     imageAlt: "Live display environment concept",
     imageCaption: "Concept visualization",
     sections: [
@@ -371,7 +371,7 @@ export const articles: Article[] = [
         heading: "List what needs a connection",
         paragraphs: [
           "A locally rendered experience and its delivery workflow can have different network needs. Separate the steps that run on the station from those that depend on a remote service, such as payment, AI processing, uploads or email.",
-          "Do not describe an entire experience as offline-capable because one screen can work without a connection. Define exactly which actions remain available and what guests see when an online dependency is unavailable.",
+          "Ask a simple question: if the internet drops, what can a guest still do? A screen might keep working while payment or email stops. The team needs to know the difference and how to explain it.",
         ],
       },
       {
@@ -398,7 +398,7 @@ export const articles: Article[] = [
       "Use the first build to answer the technical question that could change the whole idea.",
     category: "Interactive Technology",
     tags: ["prototyping", "sensors", "interaction"],
-    image: "/images/gesture-basketball-concept.webp",
+    image: "/images/gesture-basketball-concept-v2.webp",
     imageAlt: "Gesture-controlled game concept",
     imageCaption: "Concept visualization",
     sections: [
@@ -419,7 +419,7 @@ export const articles: Article[] = [
       {
         heading: "Turn findings into a production decision",
         paragraphs: [
-          "Review the prototype against the agreed question. Identify the conditions that make it work, the limitations it exposed and the next validation step. A prototype is evidence for a decision, not proof that the entire activation is finished.",
+          "Come back to the question you started with. What worked, under what conditions, and what still needs a test? A useful prototype gives you a clearer next decision, even when the answer is to change the idea.",
           "Update the experience flow and scope around the findings. Confirm who supplies hardware, content, networking and event operations so the production plan reflects the actual responsibilities.",
         ],
       },

@@ -13,7 +13,7 @@ export default function Work() {
       <PageHero
         label="WORK / EXPERIENCE DESIGNS"
         title="A little hard to explain. A lot better to experience."
-        description="Explore the thinking behind a selection of interactive experiences. Each study describes its scope and technical approach; concept visualizations illustrate the interaction."
+        description="See what guests do, how each experience works and the details that need care. These are experience designs with their scope noted; the images are concept illustrations."
       />
       <section className="wrap work-index">
         <WorkFilter studies={publishedStudies} />

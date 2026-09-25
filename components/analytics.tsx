@@ -30,7 +30,8 @@ export function Analytics() {
     if (path.startsWith("/work/")) track("case_study_view");
     if (path === "/capabilities") track("capabilities_visit");
     campaignParams();
-    if (new URLSearchParams(window.location.search).has("utm_source")) track("campaign_landing_visit");
+    if (new URLSearchParams(window.location.search).has("utm_source"))
+      track("campaign_landing_visit");
     const timer = path.startsWith("/services/")
       ? setTimeout(() => track("service_engagement"), 15000)
       : undefined;

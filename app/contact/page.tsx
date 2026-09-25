@@ -22,9 +22,9 @@ export default function Contact() {
         <aside>
           <h2>Start with the moment.</h2>
           <p>
-            Tell us about your audience, the experience and the date you are
-            working toward. We can work through the technical questions
-            together.
+            Who’s coming, what would you like them to do, and when is the event?
+            Start there. You don’t need all the technical answers to get in
+            touch.
           </p>
           <p>
             <a
@@ -39,8 +39,8 @@ export default function Contact() {
             Request a FrameFlix quote ↗
           </Link>
           <p style={{ marginTop: 35 }}>
-            For files or a longer brief, email us directly. This form does not
-            accept attachments.
+            Have a moodboard, reference image or longer brief? Email it to us
+            directly; attachments aren’t available in this form.
           </p>
         </aside>
         <InquiryForm />

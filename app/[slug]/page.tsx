@@ -186,7 +186,7 @@ export default async function Page({
         <PageHero
           label="QUESTIONS / ANSWERS"
           title="A few things worth knowing."
-          description="Practical details for planning your next photo experience or custom activation."
+          description="Wondering about booth time, keepsakes or how to get started? Here are the answers to a few common questions."
         />
         <div className="wrap faq-list">
           {faqs.map(([q, a]) => (
@@ -338,7 +338,7 @@ export default async function Page({
         <PageHero
           label="FRAMEFLIX / PRODUCT GALLERY"
           title="The little details make it personal."
-          description="Explore the current FrameFlix product imagery. Illustrative colours, keepsakes and setups; your final design is confirmed in your proposal."
+          description="Take a look at the colours, frames and sticker ideas. These images illustrate the options; we’ll confirm your event’s design and setup with you."
         />
         <div className="wrap">
           <Gallery />
@@ -413,12 +413,12 @@ export default async function Page({
           <div>
             <p>
               {magnets
-                ? "The nameplate brings the event into the keepsake. Send the exact wording and any approved artwork with your inquiry. Review the proof before production."
-                : "The station combines printing and cutting with attendant-led operation. Photo stickers, labels, name tags and event branding can be tailored to the occasion. Ask for examples of the format and finish you are considering."}
+                ? "Your names, a date or a little message can make it yours. Send us the wording and any approved artwork, and we’ll share a proof for you to check before we make it."
+                : "Our attendant handles the printing and cutting while guests watch their stickers take shape. Tell us whether you’re thinking of photo stickers, name tags or event labels, and ask us for examples."}
             </p>
             <p>
-              Packages and quantities are confirmed in your written quote. Share
-              the date, location, guest count and preferred coverage window.
+              Tell us your date, venue and guest count. We’ll help you choose
+              the quantities and booth time, then put everything in your quote.
             </p>
             <a
               className="text-link"

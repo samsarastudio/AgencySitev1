@@ -2029,4 +2029,42 @@ img {
   }
 }
 
-.site-header nav{font-size:.875rem}.footer-links{font-size:.875rem}.text-link{min-height:36px}.menu-toggle{min-height:44px}.filter{min-height:44px}
+.site-header nav {
+  font-size: 0.875rem;
+}
+.footer-links {
+  font-size: 0.875rem;
+}
+.text-link {
+  min-height: 36px;
+}
+.menu-toggle {
+  min-height: 44px;
+}
+.filter {
+  min-height: 44px;
+}
+
+/* Keep the custom installations visible, including their independent bases. */
+.hero-visual {
+  height: auto;
+  aspect-ratio: 3 / 2;
+}
+.case-hero .study-media {
+  aspect-ratio: 3 / 2;
+}
+@media (max-width: 600px) {
+  .hero-visual {
+    height: auto;
+    aspect-ratio: 3 / 2;
+  }
+  .hero-visual img {
+    object-position: center;
+  }
+  .hero-visual .visual-title {
+    display: none;
+  }
+  .case-hero .study-media {
+    aspect-ratio: 3 / 2;
+  }
+}

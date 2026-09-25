@@ -6,6 +6,9 @@ import {resolve,sep} from 'node:path';
 const staleDevTypes=resolve('.next/dev/types');
 if(!staleDevTypes.startsWith(resolve('.next')+sep))throw new Error('Unexpected cache path');
 await rm(staleDevTypes,{recursive:true,force:true});
+const oldExport=resolve('out');
+if(oldExport!==resolve(process.cwd(),'out'))throw new Error('Unexpected export path');
+await rm(oldExport,{recursive:true,force:true});
 await mkdir('.preview-api',{recursive:true});
 await rename('app/api','.preview-api/api');
 try {

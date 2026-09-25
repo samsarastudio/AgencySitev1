@@ -37,7 +37,7 @@ export function Packages() {
           features: [
             "3 hours of active booth coverage",
             "120 guest photo frames",
-            "Attendant and guest-flow support",
+            "An attendant to run the booth and help guests",
             "Custom design, QR insert and premium props",
           ],
         },
@@ -45,7 +45,7 @@ export function Packages() {
           name: "Signature",
           quantity: "Custom",
           gallery: "Agreed in your quote",
-          copy: "For a brief that needs its own package.",
+          copy: "For an event with something extra in mind.",
           features: [
             "Tailored coverage and frame count",
             "Attendant-operated experience",

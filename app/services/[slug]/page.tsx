@@ -55,7 +55,7 @@ export default async function Service({
           </div>
         </section>
         <section className="content-section two-col">
-          <h2>Prove the important part.</h2>
+          <h2>What we’ll work through with you.</h2>
           <p className="lead">{s.consideration}</p>
         </section>
         {slug === "photo-experiences" && (

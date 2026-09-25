@@ -61,7 +61,7 @@ export default async function StudyPage({
           </aside>
           <div className="case-copy">
             <section>
-              <h2>The brief</h2>
+              <h2>The idea</h2>
               <p>{s.brief}</p>
             </section>
             <section>
@@ -69,7 +69,7 @@ export default async function StudyPage({
               <p>{s.challenge}</p>
             </section>
             <section>
-              <h2>The experience</h2>
+              <h2>What guests do</h2>
               <p>{s.experience}</p>
             </section>
             <section>
@@ -84,7 +84,7 @@ export default async function StudyPage({
               </ol>
             </section>
             <section>
-              <h2>Designed for the room</h2>
+              <h2>What makes it work</h2>
               <p>{s.production}</p>
             </section>
             {s.results && (

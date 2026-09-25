@@ -2,9 +2,9 @@
 import { useState } from "react";
 const nodes = [
   ["Idea", "Start with the moment you want people to remember."],
-  ["Software", "Give the interaction a clear, reliable logic."],
+  ["Software", "Make each step easy for your guests to follow."],
   ["Hardware", "Connect the cameras, sensors, displays and prints."],
-  ["Experience", "Bring the whole thing into the room."],
+  ["Experience", "Put it all together and see how it feels to take part."],
 ];
 export function Signal() {
   const [active, setActive] = useState(0);

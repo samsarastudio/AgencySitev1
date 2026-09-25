@@ -69,7 +69,7 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
     );
     if (!configured) {
       show(
-        "Your brief has not been sent. Online delivery is not connected yet. You can open an email draft below with these details.",
+        "Your email draft is ready. Nothing has been sent yet. Open the draft below, review your details and send it from your email app.",
       );
       return;
     }
@@ -146,7 +146,7 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
         Fields marked * are required.{" "}
         {configured
           ? "We use your details to respond to this inquiry."
-          : "Online delivery is not connected yet. Complete the brief to prepare an email, or contact us directly."}
+          : "This form prepares an email for you to review and send. You can also email us directly."}
       </p>
       <div className="honeypot" aria-hidden="true">
         <label>
@@ -198,7 +198,7 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
             }
           />
         </label>
-        {field("audience", "Approximate audience")}
+        {field("audience", "About how many guests?")}
         <label className="field" htmlFor="budget">
           Budget range (optional)
           <select id="budget" name="budget">
@@ -263,10 +263,11 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
         )}
         <div className="field full">
           <label htmlFor="message">
-          {photo
-            ? "Tell us about the event and your nameplate idea"
-            : "Tell us what you want to make happen"}{" "}
-          *</label>
+            {photo
+              ? "Tell us about the event and your nameplate idea"
+              : "Tell us what you want to make happen"}{" "}
+            *
+          </label>
           <textarea
             id="message"
             name="message"
@@ -293,7 +294,11 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
         />
         <span>
           I agree that InMoment may use these details to respond to my inquiry.
-          I have read the <Link href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy<span className="sr-only"> (opens in a new tab)</span></Link>. *
+          I have read the{" "}
+          <Link href="/privacy" target="_blank" rel="noopener noreferrer">
+            Privacy Policy<span className="sr-only"> (opens in a new tab)</span>
+          </Link>
+          . *
         </span>
       </label>
       {errors.consent && (
@@ -305,12 +310,12 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
         {busy
           ? "Sending…"
           : done
-            ? "Brief delivered"
+            ? "Message sent"
             : configured
               ? photo
                 ? "Request a quote"
-                : "Send the brief"
-              : "Prepare email brief"}{" "}
+                : "Send your message"
+              : "Prepare my email"}{" "}
         <span aria-hidden="true">↗</span>
       </button>
       {message && (
