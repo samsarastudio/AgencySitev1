@@ -1,0 +1,102 @@
+{
+  "privacy": {
+    "title": "Privacy Policy",
+    "updated": "2026-09-25",
+    "sections": [
+      {
+        "heading": "1. Who we are",
+        "body": "InMoment Services operates FrameFlix photo experiences and provides creative technology services. This policy explains how we collect, use, disclose and safeguard information when you visit this website, submit an inquiry or communicate with us. Contact: hello@inmomentservices.com."
+      },
+      {
+        "heading": "2. Information we collect",
+        "body": "We may collect contact details such as your name, email and company; event or project details such as dates, audience, venue, budget range and messages; and quote preferences such as package, service and colour. Technical information such as IP address and browser type may be used to operate and secure the site. We do not knowingly collect personal information from children under 13. If you believe we have, please contact us so we can delete it."
+      },
+      {
+        "heading": "3. How we use your information",
+        "body": "We use inquiry information to respond, prepare proposals and coordinate services. Information may also be used to provide event gallery access, improve the site, comply with legal obligations and protect our rights. We do not sell personal information to third parties."
+      },
+      {
+        "heading": "4. Online photos & galleries",
+        "body": "Online gallery access depends on your package: Essential includes 3 months, Premium includes 12 months, and Signature packages use a custom retention period agreed in writing. After expiry, gallery links may be disabled and files may be deleted. Please download photos you wish to keep before access expires."
+      },
+      {
+        "heading": "5. Sharing of information",
+        "body": "We may share information with service providers who help operate the site, send email or host data under appropriate confidentiality obligations; with professional advisors or authorities when required by law; or with successors in a business transfer, with notice where required."
+      },
+      {
+        "heading": "6. Data retention & security",
+        "body": "We retain inquiry and booking information as long as needed to provide services, resolve disputes, and meet legal or accounting requirements. We use reasonable administrative and technical measures to protect information; no method of transmission or storage is completely secure."
+      },
+      {
+        "heading": "7. Your choices",
+        "body": "You may request access to, correction of, or deletion of personal information we hold about you, subject to applicable law. Email us at hello@inmomentservices.com. You may also unsubscribe from marketing emails using the link in those messages (service-related messages may still be sent)."
+      },
+      {
+        "heading": "8. Cookies, analytics & consent",
+        "body": "This website uses essential storage for your privacy preference. Optional analytics are off until you choose to allow them. If enabled, analytics may record page paths, campaign parameters and interaction event names; form contents are not included. You can change your choice using Cookie preferences in the footer. Submitting an inquiry requires separate consent to use your details to respond. No advertising trackers are enabled on this website."
+      },
+      {
+        "heading": "9. Materials & product information",
+        "body": "For transparency regarding our physical products: FrameFlix fridge magnets are custom made for your event, with dye-sublimation photo inserts. Material details are provided here for disclosure purposes and may also appear in our Disclaimer. Product appearance and durability can vary with use, storage, and environmental conditions."
+      },
+      {
+        "heading": "10. Changes to this policy",
+        "body": "We may update this Privacy Policy from time to time. The “Last updated” date at the top will change when we do. Continued use of the site after updates constitutes acceptance of the revised policy."
+      },
+      {
+        "heading": "11. Contact",
+        "body": "Questions about this Privacy Policy? Contact FrameFlix by InMoment at hello@inmomentservices.com. See also our Disclaimer."
+      }
+    ]
+  },
+  "disclaimer": {
+    "title": "Disclaimer",
+    "updated": "2026-07-03",
+    "sections": [
+      {
+        "heading": "1. General",
+        "body": "The information on the FrameFlix by InMoment website is provided for general information and marketing purposes. By using this site or requesting a quote, you acknowledge this Disclaimer and our Privacy Policy."
+      },
+      {
+        "heading": "2. Quotes & estimates",
+        "body": "Package prices, add-ons, and totals shown on this website (including the quote builder) are estimates only. Final pricing may change based on event date, location, travel, design complexity, guest count, rush production, or other factors confirmed in a written proposal or agreement. Submitting a quote request does not create a binding contract until we issue and you accept a formal proposal (or other written confirmation)."
+      },
+      {
+        "heading": "3. Custom magnets",
+        "body": "FrameFlix fridge magnets are custom made for your event, with dye-sublimation photo inserts. While we design them as keepsakes under normal indoor display conditions, they may be affected by heat, prolonged direct sunlight, moisture, impact, or improper storage. Colours, finish, and fine details may vary slightly between production batches and on-screen previews. FrameFlix is not liable for damage caused by misuse, extreme environments, or modifications made by third parties."
+      },
+      {
+        "heading": "4. Coverage hours",
+        "body": "Unless otherwise stated in your proposal, packages include three (3) hours of coverage, excluding setup and teardown time. Setup and teardown are performed outside the coverage window. Additional hours may be available as an add-on, subject to availability."
+      },
+      {
+        "heading": "5. Photo frames & allotments",
+        "body": "Base packages include sixty (60) custom photo frames unless your written proposal states otherwise. Additional frames may be purchased in 20-packs. Unlimited digital shots during coverage do not mean unlimited physical frames."
+      },
+      {
+        "heading": "6. Online photos",
+        "body": "Online gallery access depends on your package: Essential includes 3 months, Premium includes 12 months, and Signature packages use a custom retention period agreed in writing. After expiry, gallery links may be disabled and files may be deleted. Please download photos you wish to keep before access expires."
+      },
+      {
+        "heading": "7. Designs & personalization",
+        "body": "Custom names, messages, and motifs are produced from information you provide. You are responsible for the accuracy of spelling and content. Approvals of proofs (when provided) constitute acceptance of the design. FrameFlix reserves the right to decline content that is unlawful, offensive, or infringes third-party rights."
+      },
+      {
+        "heading": "8. Service limitations",
+        "body": "Event services depend on venue access, power, space, and safe operating conditions. We bring backup equipment where practical, but we are not liable for delays or interruptions caused by venue restrictions, weather, force majeure, or circumstances beyond our reasonable control. Liability, if any, is limited to fees paid for the affected services, to the maximum extent permitted by law."
+      },
+      {
+        "heading": "9. Website content",
+        "body": "Images, sample messages, and style previews on this website are for illustrative purposes only. Real sample images can be provided when you request a quote. Our custom design and generation capabilities go far beyond what is shown online. Actual products and event setups may differ. We strive for accuracy but do not warrant that all website content is complete, current, or error-free."
+      },
+      {
+        "heading": "10. Governing law",
+        "body": "This Disclaimer is governed by the laws of the Province of Ontario and the applicable laws of Canada, without regard to conflict-of-law principles. Any disputes shall be subject to the courts of Ontario, unless otherwise required by law."
+      },
+      {
+        "heading": "11. Contact",
+        "body": "Questions about this Disclaimer? Contact hello@inmomentservices.com. See also our Privacy Policy."
+      }
+    ]
+  }
+}

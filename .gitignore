@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+.env*
+!.env.example
+.sites-runtime/
+*.tsbuildinfo
+test-results/
+.preview-api/
