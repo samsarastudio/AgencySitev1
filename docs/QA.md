@@ -17,3 +17,8 @@ WCAG 2.2 AA is the implementation target, not an external certification. Semanti
 ## Copy and image update — September 25
 
 Warmer copy across the site; motto preserved. Five coherent InMoment installation concept images replace the older visual set. In-car concept removed from public content and assets. Production build and all 48 current content routes pass; image references resolve. Mobile 390px kiosk detail and five-item work index visually checked. Existing form logic is unchanged.
+
+
+## Pi blog system validation (2026-09-25)
+
+Production build and 23 automated tests passed. Tests cover API hostname/key checks, slug upserts and stable IDs, Lexical input, draft/future visibility, optimistic edit conflicts and returned revision reuse, session checks, upload/path restrictions, rate limits and safe Markdown rendering. Browser verification on an isolated local production server confirmed sign-in, draft creation with multiple tags, persistence after restart, publish and public article rendering, then unpublish and a public not-found page. No test posts were sent to FrameFlix or the live Pi. Pi installation, Cloudflare settings and live secrets remain deployment steps.

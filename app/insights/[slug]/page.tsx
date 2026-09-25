@@ -1,22 +1,36 @@
+import { publicPosts } from "@/lib/blog-store";
+import { connection } from "next/server";
+import { BlogMarkdown } from "@/components/blog-markdown";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { publishedArticles, readingTime, headingId } from "@/content/articles";
+import {
+  publishedArticles as seedArticles,
+  readingTime,
+  headingId,
+} from "@/content/articles";
 import { PageHero, Button } from "@/components/ui";
 import { BackLink } from "@/components/back-link";
 import { meta, JsonLd, origin } from "@/lib/seo";
 export function generateStaticParams() {
-  return publishedArticles.map((a) => ({ slug: a.slug }));
+  return seedArticles.map((a) => ({ slug: a.slug }));
 }
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  if (process.env.SITE_EXPORT !== "1") await connection();
+  const publishedArticles = await publicPosts();
   const { slug } = await params;
   const a = publishedArticles.find((a) => a.slug === slug);
   if (!a) return {};
-  const m = meta(a.title, a.description, `/insights/${slug}`, a.image);
+  const m = meta(
+    a.title,
+    a.metaDescription || a.description,
+    `/insights/${slug}`,
+    a.image,
+  );
   return {
     ...m,
     openGraph: {
@@ -33,6 +47,8 @@ export default async function ArticlePage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
+  if (process.env.SITE_EXPORT !== "1") await connection();
+  const publishedArticles = await publicPosts();
   const { slug } = await params;
   const a = publishedArticles.find((a) => a.slug === slug);
   if (!a) notFound();
@@ -83,29 +99,19 @@ export default async function ArticlePage({
           <aside>
             <p className="eyebrow">IN THIS NOTE</p>
             <ol>
-              {a.sections.map((s) => (
-                <li key={s.heading}>
-                  <a href={"#" + headingId(s.heading)}>{s.heading}</a>
-                </li>
-              ))}
+              {a.sections
+                .filter((s) => s.heading)
+                .map((s, i) => (
+                  <li key={s.heading}>
+                    <a href={"#" + headingId(s.heading) + "-" + i}>
+                      {s.heading}
+                    </a>
+                  </li>
+                ))}
             </ol>
           </aside>
           <article className="prose">
-            {a.sections.map((s) => (
-              <section key={s.heading}>
-                <h2 id={headingId(s.heading)}>{s.heading}</h2>
-                {s.paragraphs.map((p) => (
-                  <p key={p}>{p}</p>
-                ))}
-                {s.items && (
-                  <ul>
-                    {s.items.map((i) => (
-                      <li key={i}>{i}</li>
-                    ))}
-                  </ul>
-                )}
-              </section>
-            ))}
+            <BlogMarkdown body={a.body || ""} />
             <div className="tag-row">
               {a.tags.map((t) => (
                 <Link href={"/insights?tag=" + encodeURIComponent(t)} key={t}>

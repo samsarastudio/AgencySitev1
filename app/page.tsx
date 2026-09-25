@@ -1,3 +1,5 @@
+import { publicPosts } from "@/lib/blog-store";
+import { connection } from "next/server";
 import Image from "next/image";
 import Link from "next/link";
 import { Button, SectionHead, WorkCard, Cta, Arrow } from "@/components/ui";
@@ -9,7 +11,9 @@ export const metadata = meta(
   "AI photobooths, custom photo experiences, connected event journeys and interactive technology for brands, agencies and event producers.",
   "/",
 );
-export default function Home() {
+export default async function Home() {
+  if (process.env.SITE_EXPORT !== "1") await connection();
+  const posts = (await publicPosts()).slice(0, 3);
   return (
     <>
       <section className="home-hero wrap">
@@ -248,23 +252,7 @@ export default function Home() {
           link="All insights"
         />
         <div className="article-teasers">
-          {[
-            [
-              "Planning an AI portrait activation",
-              "experiential-ai",
-              "AI / PRODUCTION",
-            ],
-            [
-              "Design the queue, not just the screen",
-              "designing-for-throughput",
-              "INTERACTIVE / PRODUCTION",
-            ],
-            [
-              "Photo keepsakes that fit your event",
-              "sticker-studio-vs-custom-frames",
-              "PHOTO EXPERIENCES",
-            ],
-          ].map(([title, slug, cat]) => (
+          {posts.map(({ title, slug, category: cat }) => (
             <Link href={`/insights/${slug}`} key={slug}>
               <span className="eyebrow">{cat}</span>
               <h3>{title}</h3>

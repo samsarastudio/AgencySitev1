@@ -19,6 +19,10 @@ Open http://127.0.0.1:3000. For production: `npm run build` then `npm start`.
 
 The existing FrameFlix site is linked at https://frameflix.inmomentservices.com. No changes were made to its domain or the current inmomentservices.com deployment.
 
+## Blog publishing
+
+A password-protected editor is available at `/admin`, with Markdown preview, cover uploads, drafts, scheduled publishing and persistent Pi storage. See [Pi blog setup](docs/BLOG-ADMIN.md) and the [compatible bot API](docs/BOT-API.md) for `POST /api/bot/posts`. Live posts update without rebuilding.
+
 ## Content and evidence
 
 Content lives in `content/` independently of components. See [Content guide](docs/CONTENT.md). Internal document extracts, client names and commercial details are deliberately outside this repository in the sibling `research` folder. Do not move that folder into `public`, commit it, or include it in hosting archives.

@@ -17,6 +17,9 @@ export type Article = {
   imageCaption?: string;
   sections: ArticleSection[];
   draft?: boolean;
+  body?: string;
+  metaDescription?: string;
+  publishedAt?: string;
 };
 const photo = "/images/setup-magnet-booth.webp";
 const defaults = {

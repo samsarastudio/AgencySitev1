@@ -7,3 +7,6 @@ out/
 *.tsbuildinfo
 test-results/
 .preview-api/
+
+data/
+.admin-login.txt

@@ -10,7 +10,9 @@ Generated images are visibly labeled “Concept visualization.” Preserve that 
 
 ## Articles
 
-Edit `content/articles.ts`. Required fields include slug, title, description, category, tags, author, publication date, image and sections. Optional `updated` preserves editorial revision dates; `draft: true` excludes the article everywhere. Add sections with heading, paragraphs and optional list items. Reading time, table of contents, tags, related articles, previous/next, RSS and sitemap are generated.
+Use `/admin` for live writing, publishing and cover uploads, or the [bot API](BOT-API.md) for automated posts. See [Pi setup and backups](BLOG-ADMIN.md). Server-stored edits override starter articles and persist independently of Git.
+
+For source-controlled starter content, edit `content/articles.ts`. Required fields include slug, title, description, category, tags, author, publication date, image and sections. Optional `updated` preserves editorial revision dates; `draft: true` excludes the article everywhere. Add sections with heading, paragraphs and optional list items. Reading time, table of contents, tags, related articles, previous/next, RSS and sitemap are generated.
 
 Six evergreen identities retain their historical publication dates with an explicit update date. Unsupported lifespan, inkjet comparison, attendance and participation statistics were removed. Repetitive trend articles consolidate to relevant planning guides through the redirect map. Raw originals remain in the separate research archive.
 
