@@ -1,7 +1,11 @@
-import {rename,mkdir,writeFile,readFile} from 'node:fs/promises';
+import {rename,mkdir,writeFile,readFile,rm} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
+import {resolve,sep} from 'node:path';
 // A private static review build, separate from the production Next.js server.
 // API source is restored in finally; previews honestly use the email-draft fallback.
+const staleDevTypes=resolve('.next/dev/types');
+if(!staleDevTypes.startsWith(resolve('.next')+sep))throw new Error('Unexpected cache path');
+await rm(staleDevTypes,{recursive:true,force:true});
 await mkdir('.preview-api',{recursive:true});
 await rename('app/api','.preview-api/api');
 try {
