@@ -23,11 +23,11 @@ Authorization: Bearer <OPENCLAW_API_KEY>
 }
 ```
 
-Required: `title` and either `content` (Markdown) or `contentLexical` (Payload-style Lexical JSON with a `root`). If both are supplied, Markdown takes precedence. Status defaults to `published`, category to `tips`, tags to an empty list and author to `FrameFlix Team`. Send `InMoment Team` explicitly when appropriate. Categories are `tips`, `events`, `studio`, `trends`; status is `published` or `draft`.
+Required: `title` and either `content` (Markdown) or `contentLexical` (Payload-style Lexical JSON with a `root`). If both are supplied and contentLexical contains a root, Lexical takes precedence, matching FrameFlix. Status defaults to `published`, category to `tips`, tags to an empty list and author to `FrameFlix Team`. Send `InMoment Team` explicitly when appropriate. Categories are `tips`, `events`, `studio`, `trends`; status is `published` or `draft`.
 
 The slug is generated from the title when omitted. Provide a fixed slug when updating or changing a title. An existing slug updates that post, preserving its numeric ID. Publication time defaults to now for a new post and retains the existing time on updates; future posts remain hidden until that instant. Omitted excerpt and SEO description retain existing values on updates. Omitted status/category/tags/author apply the defaults above. Cover images can be changed in `/admin`.
 
-A created post returns HTTP 201, an update HTTP 200:
+Both creation and updates return HTTP 200, matching FrameFlix:
 
 ```json
 {"ok": true, "id": 87, "slug": "example-blog-title", "action": "created"}
@@ -40,3 +40,11 @@ Requests are limited to 10/minute per trusted client IP. Enable the Cloudflare s
 Markdown is retained for rendering and converted to a Payload-style Lexical representation on save. This is a filesystem CMS, not a Payload installation. Standard paragraphs, headings, bold/italic, lists, links, quotes, breaks and code are supported for Lexical input. Custom Payload blocks/uploads are rejected with 422; send Markdown for those posts. Images in the stored Lexical representation become links. Arbitrary Payload plugins are not supported.
 
 Use a separate bot key for each independently deployed website. Keep it only in server/bot configuration, never in browser code or committed request examples.
+
+
+## Verify the automation connection
+
+Authenticated `GET /api/bot/posts` uses the same hostname and bearer checks as POST. It returns `{ "ok": true, "authenticated": true, "storage": "writable", "apiVersion": 1 }` only after verifying readable posts and atomic storage writes. No post is created. Run `npm run blog:check` from the configured server or automation environment. A successful check verifies connectivity, credentials and storage; a successful POST response is still required to confirm an individual post was published. Never mark a run successful solely because an invalid key returned 401.
+
+
+Compatibility reviewed against `samsarastudio/WebisteBooth` commit `841e798`: `src/lib/submit-post.ts` and `src/app/(frontend)/api/bot/posts/route.ts`. Blank optional slug, author, Markdown and publication date are treated as omitted; tags are trimmed and empty tags removed. InMoment retains bounded input validation, explicit hostname checks, future publication visibility and constant-time key comparison. It does not share FrameFlix's Payload database or login accounts.

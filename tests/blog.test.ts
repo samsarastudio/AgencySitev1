@@ -12,11 +12,15 @@ import {
   verifyPassword,
   guard,
 } from "../lib/admin-auth";
-import { POST as botPost } from "../app/api/bot/posts/route";
+import { POST as botPost, GET as checkBot } from "../app/api/bot/posts/route";
 import {
   GET as readAdmin,
   PUT as writeAdmin,
 } from "../app/api/admin/posts/route";
+import {
+  GET as sessionStatus,
+  POST as login,
+} from "../app/api/admin/session/route";
 import { POST as upload } from "../app/api/admin/upload/route";
 import { markdownToLexical, lexicalToMarkdown } from "../lib/bot-content";
 import { botRateLimit } from "../lib/bot-api";
@@ -32,8 +36,8 @@ test("blog persistence, API contract and protection", async (t) => {
   process.env.OPENCLAW_API_KEY = randomBytes(32).toString("hex");
   process.env.ADMIN_SESSION_SECRET = randomBytes(32).toString("hex");
   process.env.ADMIN_PASSWORD_HASH =
-    "test-salt:" +
-    scryptSync("test-password-long", "test-salt", 64).toString("hex");
+    "abcdef0123456789:" +
+    scryptSync("test-password-long", "abcdef0123456789", 64).toString("hex");
   const request = (data: unknown, headers: Record<string, string> = {}) =>
     new NextRequest("http://localhost:3000/api/bot/posts", {
       method: "POST",
@@ -64,9 +68,44 @@ test("blog persistence, API contract and protection", async (t) => {
         404,
       );
     });
+    await t.test(
+      "authenticated readiness checks storage without publishing",
+      async () => {
+        const before = (await listPosts()).length;
+        assert.equal(
+          (await checkBot(request({}, { authorization: "Bearer wrong" })))
+            .status,
+          401,
+        );
+        const r = await checkBot(request({}));
+        assert.equal(r.status, 200);
+        assert.equal((await r.json()).storage, "writable");
+        assert.equal((await listPosts()).length, before);
+      },
+    );
+    await t.test(
+      "unconfigured admin never exposes deployment instructions",
+      async () => {
+        const secret = process.env.ADMIN_SESSION_SECRET;
+        delete process.env.ADMIN_SESSION_SECRET;
+        const status = sessionStatus(
+          new NextRequest("http://localhost:3000/api/admin/session"),
+        );
+        assert.deepEqual(await status.json(), { authenticated: false });
+        const r = await login(
+          new NextRequest("http://localhost:3000/api/admin/session", {
+            method: "POST",
+            body: "{}",
+          }),
+        );
+        assert.equal(r.status, 503);
+        assert.doesNotMatch(await r.text(), /npm|ADMIN_|setup/i);
+        process.env.ADMIN_SESSION_SECRET = secret;
+      },
+    );
     await t.test("creates once and upserts the same numeric id", async () => {
       const a = await botPost(request(payload));
-      assert.equal(a.status, 201);
+      assert.equal(a.status, 200);
       const first = await a.json();
       assert.equal(first.action, "created");
       assert.equal(typeof first.id, "number");
@@ -104,7 +143,7 @@ test("blog persistence, API contract and protection", async (t) => {
           ),
         }),
       );
-      assert.equal(r.status, 201);
+      assert.equal(r.status, 200);
       const p = (await listPosts()).find((p) => p.slug === "lexical-check")!;
       assert.equal(p.category, "tips");
       assert.equal(p.draft, false);
@@ -136,6 +175,32 @@ test("blog persistence, API contract and protection", async (t) => {
           (await listPosts()).find((p) => p.slug === published.slug)?.revision,
           published.revision,
         );
+      },
+    );
+    await t.test(
+      "FrameFlix automation payload accepts empty optional fields and prioritizes Lexical",
+      async () => {
+        const r = await botPost(
+          request({
+            title: "FrameFlix compatibility",
+            slug: "",
+            author: "",
+            publishedAt: "",
+            content: "Ignored Markdown",
+            contentLexical: markdownToLexical(
+              "## From Lexical\n\nThe preferred body.",
+            ),
+            tags: [" photo booth ", ""],
+          }),
+        );
+        assert.equal(r.status, 200);
+        const result = await r.json();
+        assert.equal(result.action, "created");
+        const saved = (await listPosts()).find((p) => p.slug === result.slug)!;
+        assert.match(saved.body, /From Lexical/);
+        assert.doesNotMatch(saved.body, /Ignored Markdown/);
+        assert.deepEqual(saved.tags, ["photo booth"]);
+        assert.equal(saved.author, "FrameFlix Team");
       },
     );
     await t.test("write conflicts preserve the newer version", async () => {

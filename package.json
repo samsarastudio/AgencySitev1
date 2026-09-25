@@ -7,12 +7,14 @@
     "build": "next build",
     "start": "next start --hostname 127.0.0.1",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test tests/inquiry.test.ts tests/submission.test.ts tests/blog.test.ts",
+    "test": "tsx --test tests/inquiry.test.ts tests/submission.test.ts tests/blog.test.ts tests/blog-setup.test.ts",
     "build:preview": "node scripts/build-preview.mjs",
     "format": "prettier --write app components content lib tests next.config.ts tsconfig.json",
-    "admin:setup": "node scripts/admin-setup.mjs"
+    "admin:setup": "node scripts/admin-setup.mjs",
+    "blog:check": "node scripts/blog-check.mjs"
   },
   "dependencies": {
+    "@next/env": "^16.3.6",
     "next": "16.3.6",
     "react": "19.3.0",
     "react-dom": "19.3.0",

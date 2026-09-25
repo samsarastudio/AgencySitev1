@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 const derive = promisify(scrypt);
 export const cookieName = "inmoment_admin";
 export const configured = () =>
-  !!process.env.ADMIN_PASSWORD_HASH &&
+  /^[a-f0-9]+:[a-f0-9]{128}$/i.test(process.env.ADMIN_PASSWORD_HASH || "") &&
   (process.env.ADMIN_SESSION_SECRET?.length || 0) >= 32;
 const signature = (value: string) =>
   createHmac("sha256", process.env.ADMIN_SESSION_SECRET || "")

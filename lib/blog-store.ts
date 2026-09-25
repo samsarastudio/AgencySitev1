@@ -1,5 +1,12 @@
 import { markdownToLexical } from "./bot-content";
-import { mkdir, readFile, readdir, writeFile, rename } from "node:fs/promises";
+import {
+  mkdir,
+  readFile,
+  readdir,
+  writeFile,
+  rename,
+  unlink,
+} from "node:fs/promises";
 import { resolve, join } from "node:path";
 import { createHash, randomUUID } from "node:crypto";
 import { articles, type Article } from "@/content/articles";
@@ -90,4 +97,27 @@ export async function savePost(input: unknown, expected: string | null) {
     () => {},
   );
   return operation;
+}
+
+// Authenticated readiness check: verify reads and atomic writes without creating a post.
+export async function checkBlogStorage() {
+  await listPosts();
+  const dir = join(blogDirectory(), "posts");
+  await mkdir(dir, { recursive: true });
+  const probe = join(dir, ".probe-" + randomUUID());
+  const renamed = probe + ".checked";
+  try {
+    await writeFile(probe, "ready", { flag: "wx", mode: 0o600 });
+    await rename(probe, renamed);
+    if ((await readFile(renamed, "utf8")) !== "ready")
+      throw new Error("Storage verification failed");
+  } finally {
+    await Promise.all(
+      [probe, renamed].map((p) =>
+        unlink(p).catch((e) => {
+          if (e.code !== "ENOENT") throw e;
+        }),
+      ),
+    );
+  }
 }

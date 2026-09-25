@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { reply, limitedBody } from "@/lib/admin-auth";
-import { listPosts, savePost } from "@/lib/blog-store";
+import { listPosts, savePost, checkBlogStorage } from "@/lib/blog-store";
 import {
   botPostSchema,
   botSlug,
@@ -10,7 +10,7 @@ import {
 } from "@/lib/bot-api";
 import { markdownToLexical, lexicalToMarkdown } from "@/lib/bot-content";
 export const runtime = "nodejs";
-export async function POST(req: NextRequest) {
+function authorize(req: NextRequest) {
   const expected = process.env.BOT_API_HOST;
   if (!expected)
     return reply({ ok: false, error: "BOT_API_HOST is not configured." }, 503);
@@ -27,6 +27,29 @@ export async function POST(req: NextRequest) {
     );
   if (!validBotKey(req.headers.get("authorization")))
     return reply({ ok: false, error: "Unauthorized." }, 401);
+  return null;
+}
+export async function GET(req: NextRequest) {
+  const denied = authorize(req);
+  if (denied) return denied;
+  try {
+    await checkBlogStorage();
+    return reply({
+      ok: true,
+      authenticated: true,
+      storage: "writable",
+      apiVersion: 1,
+    });
+  } catch {
+    return reply(
+      { ok: false, error: "Blog storage is not ready. Check the server logs." },
+      503,
+    );
+  }
+}
+export async function POST(req: NextRequest) {
+  const denied = authorize(req);
+  if (denied) return denied;
   const rate = botRateLimit(botClientIp(req.headers));
   if (!rate.allowed) {
     const r = reply(
@@ -72,10 +95,13 @@ export async function POST(req: NextRequest) {
       );
     let body: string, contentLexical: Record<string, unknown>;
     try {
-      body = input.content || lexicalToMarkdown(input.contentLexical);
-      contentLexical = input.content
-        ? markdownToLexical(input.content)
-        : input.contentLexical!;
+      const hasLexical = !!input.contentLexical?.root;
+      body = hasLexical
+        ? lexicalToMarkdown(input.contentLexical)
+        : input.content!;
+      contentLexical = hasLexical
+        ? input.contentLexical!
+        : markdownToLexical(body);
     } catch (e) {
       return reply({ ok: false, error: (e as Error).message }, 422);
     }
@@ -118,7 +144,7 @@ export async function POST(req: NextRequest) {
             slug: saved.slug,
             action: current ? "updated" : "created",
           },
-          current ? 200 : 201,
+          200,
         );
       } catch (e) {
         if ((e as Error).message === "CONFLICT" && attempt < 2) continue;

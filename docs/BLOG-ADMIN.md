@@ -44,3 +44,28 @@ Default storage is `data/blog` in the checkout. An absolute `BLOG_DATA_DIR` keep
 Draft text is hidden from public queries. Uploaded images have public, unguessable URLs even when attached to a draft; do not upload confidential media. The editor accepts JPEG, PNG and WebP up to 8 MB, re-encodes them and removes metadata. History is retained on disk; there is no restore button yet.
 
 For local development, run `npm run admin:setup -- --local` then `npm run dev`. The password is in `.admin-login.txt`. Production requires an explicit `ADMIN_ORIGIN`.
+
+
+## Repair an existing deployment
+
+On the Pi, in the actual app directory:
+
+```sh
+git pull --ff-only
+npm ci
+npm run admin:setup -- --origin https://inmomentservices.com
+npm run build
+```
+
+Restart the existing service/container, then run `npm run blog:check`. Setup repairs missing credentials and preserves existing valid admin credentials and the existing bot key. If a password was generated it is saved to `.admin-login.txt`. If a bot key was missing it is generated in `.env.local`; privately configure the automation with that value. Do not paste keys into chat.
+
+The check calls authenticated `GET /api/bot/posts`, verifies the running app can read and atomically write its post storage, and does not publish a post. A 401 from an invalid key alone is not a publishing test. Run the check with the same environment/key the automation uses as well.
+
+For Docker, mount the environment/data into the running container; changing a host `.env.local` does not update an already-built image automatically. For systemd/PM2, confirm the working directory and environment used by the service. Explicit service environment variables override `.env.local`, including stale or blank values. Restart/recreate the service after changing those values. Do not use `admin:setup -- --reset` unless you intend to change the admin password.
+
+The public admin screen shows only sign-in and generic errors. Deployment guidance belongs here, never on the public page.
+
+
+### Existing FrameFlix-style PM2 deployment
+
+FrameFlix's `ecosystem.config.cjs` loads `.env` into the PM2 environment and uses a different application root. InMoment's setup writes `.env.local` in **AgencySitev1's own directory**, which Next.js loads at runtime. Do not run setup inside the FrameFlix checkout or restart the FrameFlix process to deploy InMoment. Use `pm2 list` to identify the existing InMoment process, then restart that process after rebuilding. If its ecosystem file explicitly supplies admin or bot variables, update those values there as well; PM2's injected environment overrides the file. Do not copy or expose secrets from FrameFlix's repository/application.

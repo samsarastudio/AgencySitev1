@@ -19,7 +19,6 @@ const blank = (): BlogPost => ({
 });
 export function BlogAdmin() {
   const [ready, setReady] = useState(false),
-    [configured, setConfigured] = useState(false),
     [signedIn, setSignedIn] = useState(false),
     [password, setPassword] = useState(""),
     [posts, setPosts] = useState<EditablePost[]>([]),
@@ -47,7 +46,6 @@ export function BlogAdmin() {
   useEffect(() => {
     api("/api/admin/session")
       .then(async (d) => {
-        setConfigured(d.configured);
         setSignedIn(d.authenticated);
         if (d.authenticated) await load();
       })
@@ -220,18 +218,6 @@ export function BlogAdmin() {
       </div>
       {!ready ? (
         <p>Opening the editor…</p>
-      ) : !configured ? (
-        <section className="admin-login">
-          <h2>Set up your editor</h2>
-          <p>
-            On your server, run <code>npm run admin:setup</code> in the website
-            folder, then restart the website. This creates your sign-in details.
-          </p>
-          <p>
-            For the live site, set <code>ADMIN_ORIGIN</code> to its exact HTTPS
-            address.
-          </p>
-        </section>
       ) : !signedIn ? (
         <form onSubmit={login} className="admin-login">
           <h2>Welcome back.</h2>

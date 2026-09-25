@@ -1,23 +1,42 @@
 import { createHash, timingSafeEqual } from "node:crypto";
 import { isIP } from "node:net";
 import { z } from "zod";
+const blankOptional = (v: unknown) =>
+  typeof v === "string" && !v.trim() ? undefined : v;
 export const botPostSchema = z
   .object({
     title: z.string().trim().min(1).max(160),
-    slug: z
-      .string()
-      .min(1)
-      .max(100)
-      .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
-      .optional(),
+    slug: z.preprocess(
+      blankOptional,
+      z
+        .string()
+        .trim()
+        .min(1)
+        .max(100)
+        .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)
+        .optional(),
+    ),
     excerpt: z.string().max(320).optional(),
-    content: z.string().trim().min(1).max(100000).optional(),
+    content: z.preprocess(
+      blankOptional,
+      z.string().trim().min(1).max(100000).optional(),
+    ),
     contentLexical: z.record(z.string(), z.unknown()).optional(),
     status: z.enum(["published", "draft"]).default("published"),
-    publishedAt: z.string().datetime({ offset: true }).optional(),
+    publishedAt: z.preprocess(
+      blankOptional,
+      z.string().trim().datetime({ offset: true }).optional(),
+    ),
     category: z.enum(["tips", "events", "studio", "trends"]).default("tips"),
-    tags: z.array(z.string().min(1).max(50)).max(15).default([]),
-    author: z.string().min(2).max(100).default("FrameFlix Team"),
+    tags: z
+      .array(z.string().trim().max(50))
+      .max(15)
+      .default([])
+      .transform((tags) => tags.filter(Boolean)),
+    author: z.preprocess(
+      blankOptional,
+      z.string().trim().min(2).max(100).default("FrameFlix Team"),
+    ),
     metaDescription: z.string().max(160).optional(),
   })
   .refine(

@@ -13,21 +13,22 @@ import {
 export const runtime = "nodejs";
 export function GET(req: NextRequest) {
   return reply({
-    configured: configured(),
     authenticated: validSession(req.cookies.get(cookieName)?.value),
   });
 }
 export async function POST(req: NextRequest) {
   if (!configured())
     return reply(
-      { error: "Run npm run admin:setup on the server, then restart the app." },
+      {
+        error:
+          "Sign-in is temporarily unavailable. Please contact the site administrator.",
+      },
       503,
     );
   if (!originAllowed(req))
     return reply(
       {
-        error:
-          "Set ADMIN_ORIGIN to the exact HTTPS website address on the server.",
+        error: "Sign-in could not be completed from this address.",
       },
       403,
     );
