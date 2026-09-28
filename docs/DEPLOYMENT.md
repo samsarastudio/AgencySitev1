@@ -19,7 +19,7 @@ Sitemap: `/sitemap.xml`; robots: `/robots.txt`; RSS: `/rss.xml`. Canonicals use 
 
 ## Static review export
 
-Run `npm run build:preview`. It produces `out/` with all content pages and static assets. APIs are deliberately excluded and restored to the source afterwards; forms remain honest email-draft or unavailable states. `_redirects` and `_headers` are included for hosts that support those files. Static-only hosts do not provide the production image transformation service; the export uses locally compressed WebP assets.
+Run `npm run build:preview`. It produces `out/` with all content pages and static assets. APIs are deliberately excluded and restored to the source afterwards; enquiry submission is disabled. `_redirects` and `_headers` are included for hosts that support those files. Static-only hosts do not provide the production image transformation service; the export uses locally compressed WebP assets.
 
 If an interrupted process leaves routes absent, restore `.preview-api/api` to `app/api` and `.preview-api/payload` to `app/(payload)` before a normal build. The normal script restores automatically even after a build failure.
 

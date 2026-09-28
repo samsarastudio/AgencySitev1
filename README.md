@@ -47,7 +47,7 @@ Server validation, input length bounds, origin checks, honeypot, minimum elapsed
 
 ## Review deployment versus production
 
-`npm run build:preview` generates a private static review export under `out/`, with noindex and the email-draft fallback. The script temporarily moves server API routes out of the export and restores them in `finally`. Never use this export as the configured server-backed production deployment.
+`npm run build:preview` generates a private static review export under `out/`, with noindex and enquiry submission disabled. The script temporarily moves server API routes out of the export and restores them in `finally`. Never use this export as the configured server-backed production deployment.
 
 `npm run build` builds the complete Next.js server including API routes and native permanent redirects. See [Deployment guide](docs/DEPLOYMENT.md) for the domain cutover and integration checks. Static review pages contain `_redirects` for compatible hosts; the canonical production redirect implementation is `next.config.ts`.
 

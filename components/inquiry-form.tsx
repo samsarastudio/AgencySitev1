@@ -17,9 +17,6 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
     service: "",
     location: "",
   });
-  const [emailDraft, setEmailDraft] = useState(
-    "mailto:hello@inmomentservices.com",
-  );
   useEffect(() => {
     setStartedAt(Date.now());
     const p = new URLSearchParams(location.search);
@@ -56,18 +53,9 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
     }
     setErrors({});
     track("send_brief", { type: photo ? "photo" : "project" });
-    const draft = `Name: ${parsed.data.name}\nEmail: ${parsed.data.email}\nCompany: ${parsed.data.company}\nType: ${parsed.data.type}\nDate: ${parsed.data.date}\nLocation: ${parsed.data.location}\nAudience: ${parsed.data.audience}\nBudget: ${parsed.data.budget}\nPackage: ${parsed.data.package}\nService: ${parsed.data.service}\nColour: ${parsed.data.colour}\n\n${parsed.data.message}`;
-    setEmailDraft(
-      "mailto:hello@inmomentservices.com?subject=" +
-        encodeURIComponent(
-          photo ? "FrameFlix event inquiry" : "New project brief",
-        ) +
-        "&body=" +
-        encodeURIComponent(draft),
-    );
     if (!configured) {
       show(
-        "Your email draft is ready. Nothing has been sent yet. Open the draft below, review your details and send it from your email app.",
+        "Enquiry submission is unavailable in this preview. Please use the live website to send your enquiry.",
       );
       return;
     }
@@ -81,7 +69,7 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
       const response = await r.json();
       if (response.errors) setErrors(response.errors);
       show(
-        response.message || "We could not confirm delivery. Please email us.",
+        response.message || "We could not save your enquiry. Please try again.",
       );
       if (r.ok) {
         setDone(true);
@@ -89,7 +77,7 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
       }
     } catch {
       show(
-        "We could not confirm delivery. Your details remain below. Please try again or email us.",
+        "We could not confirm your submission. Your details remain in the form. Please try again.",
       );
     } finally {
       setBusy(false);
@@ -144,7 +132,7 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
         Fields marked * are required.{" "}
         {configured
           ? "We use your details to respond to this inquiry."
-          : "This form prepares an email for you to review and send. You can also email us directly."}
+          : "Enquiry submission is unavailable in this preview. Please use the live website."}
       </p>
       <div className="honeypot" aria-hidden="true">
         <label>
@@ -266,6 +254,9 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
               : "Tell us what you want to make happen"}{" "}
             *
           </label>
+          <span className="form-note" id="message-hint">
+            A sentence or two is enough (at least 20 characters).
+          </span>
           <textarea
             id="message"
             name="message"
@@ -273,7 +264,9 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
             minLength={20}
             maxLength={6000}
             aria-invalid={!!errors.message}
-            aria-describedby={errors.message ? "message-error" : undefined}
+            aria-describedby={
+              errors.message ? "message-hint message-error" : "message-hint"
+            }
           />
           {errors.message && (
             <span className="field-error" id="message-error">
@@ -304,7 +297,7 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
           {errors.consent}
         </p>
       )}
-      <button className="button" disabled={busy || done}>
+      <button className="button" disabled={busy || done || !configured}>
         {busy
           ? "Sending…"
           : done
@@ -313,7 +306,7 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
               ? photo
                 ? "Request a quote"
                 : "Send your message"
-              : "Prepare my email"}{" "}
+              : "Preview only"}{" "}
         <span aria-hidden="true">↗</span>
       </button>
       {message && (
@@ -324,17 +317,6 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
           role={done ? "status" : "alert"}
         >
           {message}
-          {!done && (
-            <p style={{ marginTop: 15, marginBottom: 0 }}>
-              <a
-                className="text-link"
-                href={emailDraft}
-                data-event="email_click"
-              >
-                Open email draft ↗
-              </a>
-            </p>
-          )}
         </div>
       )}
     </form>
