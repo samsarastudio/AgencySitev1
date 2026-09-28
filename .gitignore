@@ -10,3 +10,6 @@ test-results/
 
 data/
 .admin-login.txt
+
+media/
+audit-temp.json

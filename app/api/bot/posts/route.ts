@@ -8,7 +8,7 @@ import {
   botRateLimit,
   botClientIp,
 } from "@/lib/bot-api";
-import { markdownToLexical, lexicalToMarkdown } from "@/lib/bot-content";
+import { nativeContent, lexicalPlainText } from "@/lib/cms-content";
 export const runtime = "nodejs";
 function authorize(req: NextRequest) {
   const expected = process.env.BOT_API_HOST;
@@ -37,14 +37,11 @@ export async function GET(req: NextRequest) {
     return reply({
       ok: true,
       authenticated: true,
-      storage: "writable",
+      storage: "ready",
       apiVersion: 1,
     });
   } catch {
-    return reply(
-      { ok: false, error: "Blog storage is not ready. Check the server logs." },
-      503,
-    );
+    return reply({ ok: false, error: "The CMS database is unavailable." }, 503);
   }
 }
 export async function POST(req: NextRequest) {
@@ -97,11 +94,11 @@ export async function POST(req: NextRequest) {
     try {
       const hasLexical = !!input.contentLexical?.root;
       body = hasLexical
-        ? lexicalToMarkdown(input.contentLexical)
+        ? lexicalPlainText(input.contentLexical) || input.title
         : input.content!;
       contentLexical = hasLexical
         ? input.contentLexical!
-        : markdownToLexical(body);
+        : await nativeContent(body);
     } catch (e) {
       return reply({ ok: false, error: (e as Error).message }, 422);
     }

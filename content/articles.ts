@@ -17,6 +17,7 @@ export type Article = {
   imageCaption?: string;
   sections: ArticleSection[];
   draft?: boolean;
+  richContent?: import("@payloadcms/richtext-lexical/lexical").SerializedEditorState;
   body?: string;
   metaDescription?: string;
   publishedAt?: string;

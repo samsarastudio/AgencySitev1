@@ -32,7 +32,7 @@ export const postSchema = z.object({
   image: z
     .string()
     .regex(
-      /^\/(?:images\/[a-zA-Z0-9_./-]+\.(?:webp|png|jpe?g)|api\/blog-media\/[a-f0-9-]+\.webp)$/,
+      /^\/(?:images\/[a-zA-Z0-9_./-]+\.(?:webp|png|jpe?g)|api\/blog-media\/[a-f0-9-]+\.webp|api\/media\/file\/[a-zA-Z0-9_.%-]+)$/,
     )
     .refine((v) => !v.includes(".."), "Invalid image path"),
   imageAlt: z.string().trim().min(3).max(300),

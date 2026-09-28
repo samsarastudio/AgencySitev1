@@ -4,10 +4,12 @@ A production Next.js 16.3.6 / React 19.3 / TypeScript agency website focused on 
 
 ## Run locally
 
-Use Node 20.9+ (Node 24 LTS recommended).
+Use Node 20.19+ (Node 24 LTS recommended).
 
 ```sh
 npm ci
+npm run cms:setup -- --origin http://127.0.0.1:3000 --email admin@example.com
+npm run cms:import
 npm run dev
 ```
 
@@ -21,7 +23,7 @@ The existing FrameFlix site is linked at https://frameflix.inmomentservices.com.
 
 ## Blog publishing
 
-A password-protected editor is available at `/admin`, with Markdown preview, cover uploads, drafts, scheduled publishing and persistent Pi storage. See [Pi blog setup](docs/BLOG-ADMIN.md) and the [compatible bot API](docs/BOT-API.md) for `POST /api/bot/posts`. Live posts update without rebuilding.
+Native Payload CMS is available at `/admin`, using SQLite, email/password staff accounts, Lexical rich text, Media uploads, draft/published posts, publication dates and an Enquiries inbox. See [Pi blog setup](docs/BLOG-ADMIN.md) and the [compatible bot API](docs/BOT-API.md) for `POST /api/bot/posts`. Live posts update without rebuilding.
 
 ## Content and evidence
 
@@ -35,7 +37,7 @@ Copy `.env.example` to `.env.local` for local configuration. Server-side secrets
 
 Contact and quote submissions are saved on the Pi and viewed in `/admin` → **Enquiries**. Visitors receive an on-page confirmation only after storage succeeds. No email provider, webhook or public enable flag is required. Replies are handled separately using the contact details in the inbox. See [enquiry inbox setup](docs/ENQUIRIES.md).
 
-- `INQUIRY_DATA_DIR`: optional absolute persistent location; defaults to `BLOG_DATA_DIR/inquiries` (or `data/blog/inquiries`).
+- `DATABASE_URI`, `CMS_MEDIA_DIR`: persistent Payload SQLite database and uploaded media.
 - `NEWSLETTER_WEBHOOK_URL`, `FORM_WEBHOOK_TOKEN`, `NEXT_PUBLIC_NEWSLETTER_ENABLED`: separate newsletter integration.
 - `NEXT_PUBLIC_SITE_URL`: canonical production origin and expected form origin.
 
@@ -61,4 +63,4 @@ Tests cover malformed submissions, missing consent, length limits, timing, honey
 
 ## Design
 
-Charcoal #171716, warm white #f3f1ec and orange #ff754d. Space Grotesk headings and Inter body are self-hosted by Next.js font optimization. Shared CSS tokens, responsive layout rules and reduced-motion support live in `app/globals.css`. Images use `next/image`, local WebP assets, reserved ratios and lazy loading except key hero images. No autoplay video or heavy 3D runtime.
+Charcoal #171716, warm white #f3f1ec and orange #ff754d. Space Grotesk headings and Inter body are self-hosted by Next.js font optimization. Shared CSS tokens, responsive layout rules and reduced-motion support live in `app/(frontend)/globals.css`. Images use `next/image`, local WebP assets, reserved ratios and lazy loading except key hero images. No autoplay video or heavy 3D runtime.

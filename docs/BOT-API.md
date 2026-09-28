@@ -23,7 +23,7 @@ Authorization: Bearer <OPENCLAW_API_KEY>
 }
 ```
 
-Required: `title` and either `content` (Markdown) or `contentLexical` (Payload-style Lexical JSON with a `root`). If both are supplied and contentLexical contains a root, Lexical takes precedence, matching FrameFlix. Status defaults to `published`, category to `tips`, tags to an empty list and author to `FrameFlix Team`. Send `InMoment Team` explicitly when appropriate. Categories are `tips`, `events`, `studio`, `trends`; status is `published` or `draft`.
+Required: `title` and either `content` (Markdown) or `contentLexical` (Payload Lexical JSON with a `root`). If both are supplied and contentLexical contains a root, Lexical takes precedence, matching FrameFlix. Status defaults to `published`, category to `tips`, tags to an empty list and author to `FrameFlix Team`. Send `InMoment Team` explicitly when appropriate. Categories are `tips`, `events`, `studio`, `trends`; status is `published` or `draft`.
 
 The slug is generated from the title when omitted. Provide a fixed slug when updating or changing a title. An existing slug updates that post, preserving its numeric ID. Publication time defaults to now for a new post and retains the existing time on updates; future posts remain hidden until that instant. Omitted excerpt and SEO description retain existing values on updates. Omitted status/category/tags/author apply the defaults above. Cover images can be changed in `/admin`.
 
@@ -33,18 +33,18 @@ Both creation and updates return HTTP 200, matching FrameFlix:
 {"ok": true, "id": 87, "slug": "example-blog-title", "action": "created"}
 ```
 
-IDs are stable numeric identifiers, not sequential counters. `action` is `created` or `updated`. Errors return `{ "ok": false, "error": "..." }`, with field details for validation failures. Codes include 400 validation, 401 key, 404 wrong host, 413 size, 415 content type, 422 unsupported rich text, 429 quota (with Retry-After), and 503 missing configuration.
+IDs are stable numeric identifiers; migrated posts retain their legacy ID in this compatibility API. `action` is `created` or `updated`. Errors return `{ "ok": false, "error": "..." }`, with field details for validation failures. Codes include 400 validation, 401 key, 404 wrong host, 413 size, 415 content type, 422 unsupported rich text, 429 quota (with Retry-After), and 503 missing configuration.
 
 Requests are limited to 10/minute per trusted client IP. Enable the Cloudflare setting as described in [Pi setup](BLOG-ADMIN.md); otherwise a shared bucket is used. Limit state resets on process restart. Body limit: 200 KB; Markdown: 100,000 characters; title: 160; excerpt: 320; SEO description: 160; tags: 15. Slugs use lowercase ASCII words/numbers separated by hyphens, at most 100 characters.
 
-Markdown is retained for rendering and converted to a Payload-style Lexical representation on save. This is a filesystem CMS, not a Payload installation. Standard paragraphs, headings, bold/italic, lists, links, quotes, breaks and code are supported for Lexical input. Custom Payload blocks/uploads are rejected with 422; send Markdown for those posts. Images in the stored Lexical representation become links. Arbitrary Payload plugins are not supported.
+Markdown is converted with Payload's native Lexical converter and stored in the Posts collection. Native Payload Lexical JSON is accepted directly and takes precedence over Markdown. Use nodes supported by this site's configured Lexical editor; arbitrary custom plugin blocks are not installed. The same rich text can be edited in `/admin` and is rendered on the public article page.
 
 Use a separate bot key for each independently deployed website. Keep it only in server/bot configuration, never in browser code or committed request examples.
 
 
 ## Verify the automation connection
 
-Authenticated `GET /api/bot/posts` uses the same hostname and bearer checks as POST. It returns `{ "ok": true, "authenticated": true, "storage": "writable", "apiVersion": 1 }` only after verifying readable posts and atomic storage writes. No post is created. Run `npm run blog:check` from the configured server or automation environment. A successful check verifies connectivity, credentials and storage; a successful POST response is still required to confirm an individual post was published. Never mark a run successful solely because an invalid key returned 401.
+Authenticated `GET /api/bot/posts` uses the same hostname and bearer checks as POST. It returns `{ "ok": true, "authenticated": true, "storage": "ready", "apiVersion": 1 }` after verifying the CMS database can read Posts. No post is created. Run `npm run blog:check` from the configured server or automation environment. A successful check verifies connectivity, credentials and database read access; a successful POST response is still required to confirm an individual post was published. Never mark a run successful solely because an invalid key returned 401.
 
 
 Compatibility reviewed against `samsarastudio/WebisteBooth` commit `841e798`: `src/lib/submit-post.ts` and `src/app/(frontend)/api/bot/posts/route.ts`. Blank optional slug, author, Markdown and publication date are treated as omitted; tags are trimmed and empty tags removed. InMoment retains bounded input validation, explicit hostname checks, future publication visibility and constant-time key comparison. It does not share FrameFlix's Payload database or login accounts.

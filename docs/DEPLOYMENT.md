@@ -2,7 +2,7 @@
 
 ## Full Next.js server
 
-1. Use a Node-capable host supporting Next.js 16.3.6. Install the locked dependencies with `npm ci`.
+1. Use a Node-capable host supporting Next.js 16.3.6. Use Node 24 LTS and install locked dependencies with `npm ci`. Follow the [Payload migration](BLOG-ADMIN.md) before building: set up the database and account, import old posts/enquiries, then restart only InMoment.
 2. Set `NEXT_PUBLIC_SITE_URL=https://inmomentservices.com`. Keep `NEXT_PUBLIC_PREVIEW=0` and leave `SITE_EXPORT` unset.
 3. Configure persistent enquiry storage and admin sign-in using [Enquiries](ENQUIRIES.md). Contact forms need no email provider. Configure the separate newsletter webhook and secret token before enabling `NEXT_PUBLIC_NEWSLETTER_ENABLED`. Each webhook should return a 2xx only after accepting a durable delivery/subscription job. Handle mail failures, opt-in, retries and unsubscribe processing in the selected provider.
 4. Run `npm run typecheck`, `npm test`, `npm run build`, then `npm start`. Public environment flags are build-time values; rebuild after changing them.
@@ -21,8 +21,8 @@ Sitemap: `/sitemap.xml`; robots: `/robots.txt`; RSS: `/rss.xml`. Canonicals use 
 
 Run `npm run build:preview`. It produces `out/` with all content pages and static assets. APIs are deliberately excluded and restored to the source afterwards; forms remain honest email-draft or unavailable states. `_redirects` and `_headers` are included for hosts that support those files. Static-only hosts do not provide the production image transformation service; the export uses locally compressed WebP assets.
 
-If an interrupted process leaves `app/api` absent, restore `.preview-api/api` to `app/api` before a normal build. The normal script restores automatically even after a build failure.
+If an interrupted process leaves routes absent, restore `.preview-api/api` to `app/api` and `.preview-api/payload` to `app/(payload)` before a normal build. The normal script restores automatically even after a build failure.
 
 ## Remaining external setup
 
-Email/CRM destination, newsletter provider, analytics adapter (if desired), approved public hosting credentials and DNS access, provider-specific privacy/retention details, and a public release decision. No fake email success, analytics dashboard, capabilities deck, client-logo wall, certificates or testimonials are present.
+Optional newsletter provider, analytics adapter (if desired), approved public hosting credentials and DNS access, provider-specific privacy/retention details, and a public release decision. No fake email success, analytics dashboard, capabilities deck, client-logo wall, certificates or testimonials are present.

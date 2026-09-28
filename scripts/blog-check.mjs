@@ -26,9 +26,9 @@ try {
     signal: AbortSignal.timeout(15000),
   });
   const data = await r.json().catch(() => null);
-  if (r.ok && data?.ok && data.storage === "writable")
+  if (r.ok && data?.ok && data.storage === "ready")
     console.log(
-      "PASS: live hostname, bot authentication and persistent storage verified. No post was published.",
+      "PASS: live hostname, bot authentication and CMS database connection verified. No post was published.",
     );
   else {
     const hints = {

@@ -26,3 +26,14 @@ Production build and 23 automated tests passed. Tests cover API hostname/key che
 ## Enquiry inbox (2026-09-27)
 
 28 automated tests and the production build pass. An isolated local production server was verified in the browser: submit contact form, see confirmation without opening email, sign into admin, select Enquiries, and read the stored name/email/message. Tests verify unauthenticated inbox requests return 401, authenticated responses disable caching, retries do not duplicate records, and storage failures return an error. No live enquiries or emails were sent during verification. Pi deployment still requires pulling, rebuilding and restarting its existing InMoment service.
+
+
+## Payload migration validation (September 27, 2026)
+
+- Production Next/Payload build passed. Native admin uses a separate root layout.
+- Disposable SQLite database: committed migration applied successfully; native email/password login returned a session token.
+- Bot create/upsert and native rich-text conversion passed; draft and future publication visibility checked.
+- Enquiry submission persisted once across a retry; anonymous reads/writes denied, staff status/notes updates passed.
+- Legacy import trial imported all 11 seed articles; a second run imported zero records. Original sources preserved.
+- Local browser verification was blocked by automatic tool approval rejecting test-server startup. Live Pi deployment and valid-key automation remain unverified because Pi access/secrets were not available.
+- Dependency audit: no high/critical findings. Five moderate entries trace to the SQLite migration tool's transitive esbuild development-server dependency; no registry fix available. Do not expose migration tooling as a server.

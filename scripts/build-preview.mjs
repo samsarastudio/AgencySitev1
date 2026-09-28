@@ -12,9 +12,10 @@ await rm(oldExport,{recursive:true,force:true});
 await mkdir('.preview-api',{recursive:true});
 await rename('app/api','.preview-api/api');
 try {
+ await rename('app/(payload)','.preview-api/payload');
  const result=spawnSync(process.execPath,['node_modules/next/dist/bin/next','build'],{stdio:'inherit',env:{...process.env,SITE_EXPORT:'1',NEXT_PUBLIC_PREVIEW:'1',NEXT_PUBLIC_FORMS_ENABLED:'false',NEXT_PUBLIC_NEWSLETTER_ENABLED:'false'}});
  if(result.status!==0)throw new Error('Preview build failed');
  const redirects=JSON.parse(await readFile('content/redirects.json','utf8'));
  await writeFile('out/_redirects',redirects.map(r=>`${r.source} ${r.destination} 301`).join('\n')+'\n');
  await writeFile('out/_headers','/*\n  X-Robots-Tag: noindex, nofollow\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n');
-}finally{await rename('.preview-api/api','app/api')}
+}finally{await rename('.preview-api/api','app/api');await rename('.preview-api/payload','app/(payload)')}

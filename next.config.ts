@@ -1,3 +1,4 @@
+import { withPayload } from "@payloadcms/next/withPayload";
 import type { NextConfig } from "next";
 import redirects from "./content/redirects.json";
 const preview = process.env.SITE_EXPORT === "1";
@@ -32,4 +33,4 @@ const config: NextConfig = {
         },
       }),
 };
-export default config;
+export default preview ? config : withPayload(config, { devBundleServerPackages: false });

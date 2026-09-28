@@ -1,3 +1,4 @@
+import { RichText } from "@payloadcms/richtext-lexical/react";
 import { publicPosts } from "@/lib/blog-store";
 import { connection } from "next/server";
 import { BlogMarkdown } from "@/components/blog-markdown";
@@ -97,21 +98,28 @@ export default async function ArticlePage({
         </div>
         <div className="article-layout">
           <aside>
-            <p className="eyebrow">IN THIS NOTE</p>
+            <p className="eyebrow">
+              {a.richContent ? "FIELD NOTES" : "IN THIS NOTE"}
+            </p>
             <ol>
-              {a.sections
-                .filter((s) => s.heading)
-                .map((s, i) => (
-                  <li key={s.heading}>
-                    <a href={"#" + headingId(s.heading) + "-" + i}>
-                      {s.heading}
-                    </a>
-                  </li>
-                ))}
+              {!a.richContent &&
+                a.sections
+                  .filter((s) => s.heading)
+                  .map((s, i) => (
+                    <li key={s.heading}>
+                      <a href={"#" + headingId(s.heading) + "-" + i}>
+                        {s.heading}
+                      </a>
+                    </li>
+                  ))}
             </ol>
           </aside>
           <article className="prose">
-            <BlogMarkdown body={a.body || ""} />
+            {a.richContent ? (
+              <RichText data={a.richContent} />
+            ) : (
+              <BlogMarkdown body={a.body || ""} />
+            )}
             <div className="tag-row">
               {a.tags.map((t) => (
                 <Link href={"/insights?tag=" + encodeURIComponent(t)} key={t}>
