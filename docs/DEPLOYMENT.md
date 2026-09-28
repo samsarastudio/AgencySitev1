@@ -4,7 +4,7 @@
 
 1. Use a Node-capable host supporting Next.js 16.3.6. Install the locked dependencies with `npm ci`.
 2. Set `NEXT_PUBLIC_SITE_URL=https://inmomentservices.com`. Keep `NEXT_PUBLIC_PREVIEW=0` and leave `SITE_EXPORT` unset.
-3. Configure the inquiry and newsletter webhooks and secret token. Test the delivery contract before enabling the corresponding `NEXT_PUBLIC_*_ENABLED` flag. Each webhook should return a 2xx only after accepting a durable delivery/subscription job. Handle mail failures, opt-in, retries and unsubscribe processing in the selected provider.
+3. Configure persistent enquiry storage and admin sign-in using [Enquiries](ENQUIRIES.md). Contact forms need no email provider. Configure the separate newsletter webhook and secret token before enabling `NEXT_PUBLIC_NEWSLETTER_ENABLED`. Each webhook should return a 2xx only after accepting a durable delivery/subscription job. Handle mail failures, opt-in, retries and unsubscribe processing in the selected provider.
 4. Run `npm run typecheck`, `npm test`, `npm run build`, then `npm start`. Public environment flags are build-time values; rebuild after changing them.
 5. Verify a real inquiry and the newsletter confirmation workflow in a controlled staging environment. Do not run tests against real contacts.
 6. Configure TLS, trusted reverse-proxy headers, shared ingress rate limiting, monitoring and log retention. Logs must not contain inquiry bodies or secrets. Consider a provider-backed challenge if abuse requires it.

@@ -22,3 +22,7 @@ Warmer copy across the site; motto preserved. Five coherent InMoment installatio
 ## Pi blog system validation (2026-09-25)
 
 Production build and 23 automated tests passed. Tests cover API hostname/key checks, slug upserts and stable IDs, Lexical input, draft/future visibility, optimistic edit conflicts and returned revision reuse, session checks, upload/path restrictions, rate limits and safe Markdown rendering. Browser verification on an isolated local production server confirmed sign-in, draft creation with multiple tags, persistence after restart, publish and public article rendering, then unpublish and a public not-found page. No test posts were sent to FrameFlix or the live Pi. Pi installation, Cloudflare settings and live secrets remain deployment steps.
+
+## Enquiry inbox (2026-09-27)
+
+28 automated tests and the production build pass. An isolated local production server was verified in the browser: submit contact form, see confirmation without opening email, sign into admin, select Enquiries, and read the stored name/email/message. Tests verify unauthenticated inbox requests return 401, authenticated responses disable caching, retries do not duplicate records, and storage failures return an error. No live enquiries or emails were sent during verification. Pi deployment still requires pulling, rebuilding and restarting its existing InMoment service.

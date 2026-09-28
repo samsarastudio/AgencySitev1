@@ -1,3 +1,4 @@
+import { saveInquiry } from "./inquiry-store";
 import { inquirySchema, newsletterSchema, validateTiming } from "./inquiry";
 const attempts = new Map<string, { count: number; until: number }>();
 export function allowAttempt(key: string, now = Date.now()) {
@@ -75,17 +76,33 @@ export async function handleSubmission(
       { message: "Please take a moment to review the form, then try again." },
       422,
     );
-  const endpoint =
-    kind === "inquiry"
-      ? process.env.INQUIRY_WEBHOOK_URL
-      : process.env.NEWSLETTER_WEBHOOK_URL;
+  if (kind === "inquiry") {
+    try {
+      const saved = await saveInquiry(inquirySchema.parse(data));
+      return json(
+        {
+          message:
+            "Thank you. Your enquiry has been received. We’ll be in touch.",
+          reference: saved.id,
+        },
+        200,
+      );
+    } catch {
+      return json(
+        {
+          message:
+            "We could not save your enquiry. Your details remain in the form. Please try again.",
+        },
+        503,
+      );
+    }
+  }
+  const endpoint = process.env.NEWSLETTER_WEBHOOK_URL;
   if (!endpoint)
     return json(
       {
         message:
-          kind === "inquiry"
-            ? "Online delivery is not connected yet. Your brief has not been sent. Please email hello@inmomentservices.com."
-            : "Newsletter signup is not connected yet. Your email has not been subscribed.",
+          "Newsletter signup is not connected yet. Your email has not been subscribed.",
       },
       503,
     );
@@ -112,9 +129,7 @@ export async function handleSubmission(
     return json(
       {
         message:
-          kind === "inquiry"
-            ? "Your brief has been delivered. Thank you for sharing the idea."
-            : "Your signup request has been received. Check your inbox for the next step.",
+          "Your signup request has been received. Check your inbox for the next step.",
       },
       200,
     );

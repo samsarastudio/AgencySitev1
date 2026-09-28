@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import type { EditablePost, BlogPost } from "@/lib/blog-model";
+import { InquiryInbox } from "./inquiry-inbox";
 import { BlogMarkdown } from "./blog-markdown";
 const today = () => new Date().toISOString().slice(0, 10);
 const blank = (): BlogPost => ({
@@ -18,6 +19,7 @@ const blank = (): BlogPost => ({
   draft: true,
 });
 export function BlogAdmin() {
+  const [section, setSection] = useState<"inquiries" | "blog">("inquiries");
   const [ready, setReady] = useState(false),
     [signedIn, setSignedIn] = useState(false),
     [password, setPassword] = useState(""),
@@ -205,7 +207,7 @@ export function BlogAdmin() {
       <div className="admin-heading">
         <div>
           <p className="eyebrow">INMOMENT / ADMIN</p>
-          <h1>Blog editor</h1>
+          <h1>Admin</h1>
         </div>
         <a
           href="/insights"
@@ -221,7 +223,7 @@ export function BlogAdmin() {
       ) : !signedIn ? (
         <form onSubmit={login} className="admin-login">
           <h2>Welcome back.</h2>
-          <p>Sign in to write, edit and publish posts.</p>
+          <p>Sign in to view enquiries and manage blog posts.</p>
           <label className="field">
             Admin password
             <input
@@ -243,7 +245,10 @@ export function BlogAdmin() {
             <button
               className="button"
               disabled={busy}
-              onClick={() => select(null)}
+              onClick={() => {
+                select(null);
+                setSection("blog");
+              }}
             >
               New post +
             </button>
@@ -269,232 +274,255 @@ export function BlogAdmin() {
               Sign out
             </button>
           </div>
-          <div className="admin-grid">
-            <aside className="admin-posts">
-              <label className="field">
-                Find a post
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  type="search"
-                />
-              </label>
-              {posts
-                .filter((p) =>
-                  (p.title + " " + p.category)
-                    .toLowerCase()
-                    .includes(query.toLowerCase()),
-                )
-                .map((p) => (
-                  <button
-                    key={p.slug}
-                    className={
-                      "admin-post " + (post?.slug === p.slug ? "selected" : "")
-                    }
-                    onClick={() => select(p)}
-                    disabled={busy}
-                  >
-                    <strong>{p.title}</strong>
-                    <span>
-                      {p.draft
-                        ? "Draft"
-                        : p.published > today()
-                          ? "Scheduled"
-                          : "Published"}{" "}
-                      · {p.published}
-                    </span>
-                  </button>
-                ))}
-            </aside>
-            {!post ? (
-              <section className="admin-empty">
-                <h2>What would you like to share?</h2>
-                <p>
-                  Choose an existing post or start a new one. Drafts stay
-                  private until you publish them.
-                </p>
-                <p>
-                  Your posts and uploaded images are saved on this server. A
-                  code update does not replace them.
-                </p>
-              </section>
-            ) : (
-              <form
-                className="admin-editor"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  save(false);
-                }}
-              >
-                <fieldset disabled={busy}>
-                  <div className="admin-editor-heading">
-                    <h2>{revision ? "Edit post" : "New post"}</h2>
-                    <span>
-                      {dirty
-                        ? "Unsaved changes"
-                        : post.draft
-                          ? "Draft"
-                          : "Published / scheduled"}
-                    </span>
-                  </div>
-                  <div className="form-grid">
-                    {field("title", "Title")}
-                    {field("slug", "Post URL (lowercase-words)")}
-                    {field("category", "Category")}
-                    {field("author", "Author")}
-                    {field(
-                      "metaDescription",
-                      "SEO description (max 160 characters)",
-                      "text",
-                      false,
-                    )}
-                    {field("published", "Publication date (UTC)", "date")}
-                    <label className="field">
-                      Tags (comma separated)
-                      <input
-                        value={tagsText}
-                        onChange={(e) => {
-                          setTagsText(e.target.value);
-                          setDirty(true);
-                        }}
-                      />
-                    </label>
-                  </div>
-                  <label className="field">
-                    Short description / search summary
-                    <textarea
-                      required
-                      minLength={10}
-                      maxLength={320}
-                      value={post.description}
-                      onChange={(e) => update("description", e.target.value)}
-                    />
-                  </label>
-                  <div className="admin-cover">
-                    <img src={post.image} alt={post.imageAlt} />
-                    <label className="field">
-                      Upload cover image
-                      <input
-                        type="file"
-                        accept="image/jpeg,image/png,image/webp"
-                        onChange={(e) => {
-                          upload(e.target.files?.[0]);
-                          e.target.value = "";
-                        }}
-                      />
-                      <small>JPEG, PNG or WebP. Up to 8 MB.</small>
-                    </label>
-                  </div>
-                  {field("image", "Cover image path")}
-                  {field("imageAlt", "Describe the image for accessibility")}
-                  {field("imageCaption", "Image caption", "text", false)}
-                  <div className="admin-toolbar">
-                    <button
-                      type="button"
-                      className="filter"
-                      aria-pressed={!preview}
-                      onClick={() => setPreview(false)}
-                    >
-                      Write
-                    </button>
-                    <button
-                      type="button"
-                      className="filter"
-                      aria-pressed={preview}
-                      onClick={() => setPreview(true)}
-                    >
-                      Preview
-                    </button>
-                    {!preview && (
-                      <>
-                        <button
-                          type="button"
-                          className="filter"
-                          onClick={() => insert("**", "**")}
-                        >
-                          Bold
-                        </button>
-                        <button
-                          type="button"
-                          className="filter"
-                          onClick={() => insert("\n\n## ")}
-                        >
-                          Heading
-                        </button>
-                        <button
-                          type="button"
-                          className="filter"
-                          onClick={() => insert("\n- ")}
-                        >
-                          List
-                        </button>
-                        <button
-                          type="button"
-                          className="filter"
-                          onClick={() => insert("[", "](https://example.com)")}
-                        >
-                          Link
-                        </button>
-                      </>
-                    )}
-                  </div>
-                  {preview ? (
-                    <article className="prose admin-preview">
-                      <h2>{post.title || "Your post title"}</h2>
-                      <p>{post.description}</p>
-                      <BlogMarkdown body={post.body} />
-                    </article>
-                  ) : (
-                    <label className="field">
-                      Post content
-                      <textarea
-                        ref={bodyRef}
-                        className="admin-body"
-                        required
-                        minLength={20}
-                        maxLength={100000}
-                        value={post.body}
-                        onChange={(e) => update("body", e.target.value)}
-                        placeholder="Start writing. Use ## for section headings, **bold**, and - for lists."
-                      />
-                    </label>
-                  )}
-                  <div className="admin-actions">
-                    <button
-                      type="button"
-                      className="button secondary"
-                      onClick={() => save(true)}
-                    >
-                      {post.draft ? "Save draft" : "Unpublish and save draft"}
-                    </button>
-                    <button className="button" type="submit">
-                      {busy
-                        ? "Saving…"
-                        : post.published > today()
-                          ? "Schedule post"
-                          : revision && !post.draft
-                            ? "Publish changes"
-                            : "Publish post"}
-                    </button>
-                    {revision && !post.draft && (
-                      <a
-                        href={"/insights/" + post.slug}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-link"
-                      >
-                        View published post ↗
-                      </a>
-                    )}
-                  </div>
-                  <p className="small-note">
-                    Saving a published post as a draft removes it from the
-                    public blog. The URL stays fixed after the first save.
-                  </p>
-                </fieldset>
-              </form>
-            )}
+          <div className="admin-toolbar" aria-label="Admin sections">
+            <button
+              className="filter"
+              aria-pressed={section === "inquiries"}
+              onClick={() => setSection("inquiries")}
+            >
+              Enquiries
+            </button>
+            <button
+              className="filter"
+              aria-pressed={section === "blog"}
+              onClick={() => setSection("blog")}
+            >
+              Blog posts
+            </button>
           </div>
+          {section === "inquiries" ? (
+            <InquiryInbox onExpired={() => setSignedIn(false)} />
+          ) : (
+            <div className="admin-grid">
+              <aside className="admin-posts">
+                <label className="field">
+                  Find a post
+                  <input
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    type="search"
+                  />
+                </label>
+                {posts
+                  .filter((p) =>
+                    (p.title + " " + p.category)
+                      .toLowerCase()
+                      .includes(query.toLowerCase()),
+                  )
+                  .map((p) => (
+                    <button
+                      key={p.slug}
+                      className={
+                        "admin-post " +
+                        (post?.slug === p.slug ? "selected" : "")
+                      }
+                      onClick={() => select(p)}
+                      disabled={busy}
+                    >
+                      <strong>{p.title}</strong>
+                      <span>
+                        {p.draft
+                          ? "Draft"
+                          : p.published > today()
+                            ? "Scheduled"
+                            : "Published"}{" "}
+                        · {p.published}
+                      </span>
+                    </button>
+                  ))}
+              </aside>
+              {!post ? (
+                <section className="admin-empty">
+                  <h2>What would you like to share?</h2>
+                  <p>
+                    Choose an existing post or start a new one. Drafts stay
+                    private until you publish them.
+                  </p>
+                  <p>
+                    Your posts and uploaded images are saved on this server. A
+                    code update does not replace them.
+                  </p>
+                </section>
+              ) : (
+                <form
+                  className="admin-editor"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    save(false);
+                  }}
+                >
+                  <fieldset disabled={busy}>
+                    <div className="admin-editor-heading">
+                      <h2>{revision ? "Edit post" : "New post"}</h2>
+                      <span>
+                        {dirty
+                          ? "Unsaved changes"
+                          : post.draft
+                            ? "Draft"
+                            : "Published / scheduled"}
+                      </span>
+                    </div>
+                    <div className="form-grid">
+                      {field("title", "Title")}
+                      {field("slug", "Post URL (lowercase-words)")}
+                      {field("category", "Category")}
+                      {field("author", "Author")}
+                      {field(
+                        "metaDescription",
+                        "SEO description (max 160 characters)",
+                        "text",
+                        false,
+                      )}
+                      {field("published", "Publication date (UTC)", "date")}
+                      <label className="field">
+                        Tags (comma separated)
+                        <input
+                          value={tagsText}
+                          onChange={(e) => {
+                            setTagsText(e.target.value);
+                            setDirty(true);
+                          }}
+                        />
+                      </label>
+                    </div>
+                    <label className="field">
+                      Short description / search summary
+                      <textarea
+                        required
+                        minLength={10}
+                        maxLength={320}
+                        value={post.description}
+                        onChange={(e) => update("description", e.target.value)}
+                      />
+                    </label>
+                    <div className="admin-cover">
+                      <img src={post.image} alt={post.imageAlt} />
+                      <label className="field">
+                        Upload cover image
+                        <input
+                          type="file"
+                          accept="image/jpeg,image/png,image/webp"
+                          onChange={(e) => {
+                            upload(e.target.files?.[0]);
+                            e.target.value = "";
+                          }}
+                        />
+                        <small>JPEG, PNG or WebP. Up to 8 MB.</small>
+                      </label>
+                    </div>
+                    {field("image", "Cover image path")}
+                    {field("imageAlt", "Describe the image for accessibility")}
+                    {field("imageCaption", "Image caption", "text", false)}
+                    <div className="admin-toolbar">
+                      <button
+                        type="button"
+                        className="filter"
+                        aria-pressed={!preview}
+                        onClick={() => setPreview(false)}
+                      >
+                        Write
+                      </button>
+                      <button
+                        type="button"
+                        className="filter"
+                        aria-pressed={preview}
+                        onClick={() => setPreview(true)}
+                      >
+                        Preview
+                      </button>
+                      {!preview && (
+                        <>
+                          <button
+                            type="button"
+                            className="filter"
+                            onClick={() => insert("**", "**")}
+                          >
+                            Bold
+                          </button>
+                          <button
+                            type="button"
+                            className="filter"
+                            onClick={() => insert("\n\n## ")}
+                          >
+                            Heading
+                          </button>
+                          <button
+                            type="button"
+                            className="filter"
+                            onClick={() => insert("\n- ")}
+                          >
+                            List
+                          </button>
+                          <button
+                            type="button"
+                            className="filter"
+                            onClick={() =>
+                              insert("[", "](https://example.com)")
+                            }
+                          >
+                            Link
+                          </button>
+                        </>
+                      )}
+                    </div>
+                    {preview ? (
+                      <article className="prose admin-preview">
+                        <h2>{post.title || "Your post title"}</h2>
+                        <p>{post.description}</p>
+                        <BlogMarkdown body={post.body} />
+                      </article>
+                    ) : (
+                      <label className="field">
+                        Post content
+                        <textarea
+                          ref={bodyRef}
+                          className="admin-body"
+                          required
+                          minLength={20}
+                          maxLength={100000}
+                          value={post.body}
+                          onChange={(e) => update("body", e.target.value)}
+                          placeholder="Start writing. Use ## for section headings, **bold**, and - for lists."
+                        />
+                      </label>
+                    )}
+                    <div className="admin-actions">
+                      <button
+                        type="button"
+                        className="button secondary"
+                        onClick={() => save(true)}
+                      >
+                        {post.draft ? "Save draft" : "Unpublish and save draft"}
+                      </button>
+                      <button className="button" type="submit">
+                        {busy
+                          ? "Saving…"
+                          : post.published > today()
+                            ? "Schedule post"
+                            : revision && !post.draft
+                              ? "Publish changes"
+                              : "Publish post"}
+                      </button>
+                      {revision && !post.draft && (
+                        <a
+                          href={"/insights/" + post.slug}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-link"
+                        >
+                          View published post ↗
+                        </a>
+                      )}
+                    </div>
+                    <p className="small-note">
+                      Saving a published post as a draft removes it from the
+                      public blog. The URL stays fixed after the first save.
+                    </p>
+                  </fieldset>
+                </form>
+              )}
+            </div>
+          )}
         </>
       )}
       {notice && (

@@ -33,13 +33,13 @@ Case studies describe documented experience designs and scope. They do not asser
 
 Copy `.env.example` to `.env.local` for local configuration. Server-side secrets must never use `NEXT_PUBLIC_` names.
 
-- `INQUIRY_WEBHOOK_URL`: HTTPS endpoint that accepts the validated JSON payload and routes it to the chosen CRM/email provider.
-- `NEWSLETTER_WEBHOOK_URL`: independent HTTPS endpoint for newsletter signup, ideally implementing double opt-in.
-- `FORM_WEBHOOK_TOKEN`: optional bearer credential used by these endpoints.
-- `NEXT_PUBLIC_FORMS_ENABLED=true` and `NEXT_PUBLIC_NEWSLETTER_ENABLED=true`: set only after the corresponding integration is connected and tested.
+Contact and quote submissions are saved on the Pi and viewed in `/admin` → **Enquiries**. Visitors receive an on-page confirmation only after storage succeeds. No email provider, webhook or public enable flag is required. Replies are handled separately using the contact details in the inbox. See [enquiry inbox setup](docs/ENQUIRIES.md).
+
+- `INQUIRY_DATA_DIR`: optional absolute persistent location; defaults to `BLOG_DATA_DIR/inquiries` (or `data/blog/inquiries`).
+- `NEWSLETTER_WEBHOOK_URL`, `FORM_WEBHOOK_TOKEN`, `NEXT_PUBLIC_NEWSLETTER_ENABLED`: separate newsletter integration.
 - `NEXT_PUBLIC_SITE_URL`: canonical production origin and expected form origin.
 
-No provider credentials were supplied. Forms therefore use an honest email-draft fallback; no live emails or subscriptions were sent. API endpoints return 503 without configuration. Success is displayed only after a configured provider acknowledges the request. No personal form contents are sent to analytics.
+No enquiry emails are sent. Public APIs cannot list enquiries; the inbox requires an admin session. No personal form contents are sent to analytics.
 
 Server validation, input length bounds, origin checks, honeypot, minimum elapsed time and a process-local request limit are implemented. For multi-instance public operation, enforce a shared rate limit at your ingress/provider and confirm trusted forwarding headers. The process-local limiter is not a distributed quota.
 

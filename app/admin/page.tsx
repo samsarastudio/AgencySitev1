@@ -1,6 +1,6 @@
 import { BlogAdmin } from "@/components/blog-admin";
 export const metadata = {
-  title: "Blog editor",
+  title: "Admin",
   robots: { index: false, follow: false },
 };
 export default function Admin() {

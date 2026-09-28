@@ -29,9 +29,7 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
       location: p.get("city") || "",
     });
   }, []);
-  const configured =
-    process.env.NEXT_PUBLIC_FORMS_ENABLED === "true" &&
-    process.env.NEXT_PUBLIC_PREVIEW !== "1";
+  const configured = process.env.NEXT_PUBLIC_PREVIEW !== "1";
   const show = (text: string) => {
     setMessage(text);
     setTimeout(() => result.current?.focus(), 0);
@@ -310,7 +308,7 @@ export function InquiryForm({ photo = false }: { photo?: boolean }) {
         {busy
           ? "Sending…"
           : done
-            ? "Message sent"
+            ? "Enquiry received"
             : configured
               ? photo
                 ? "Request a quote"
